@@ -1,29 +1,30 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Client -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Client %></h1>
+</div>
 
-<p>
-  <strong>User:</strong>
-  <%= @client.user %>
-</p>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
+      <dd><pre class="prettyprint"><%= @client.name %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:subdomain) %></dt>
+      <dd><pre class="prettyprint"><%= @client.subdomain %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:url) %></dt>
+      <dd><pre class="prettyprint"><%= @client.url %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:description) %></dt>
+      <dd><pre class="prettyprint"><%= @client.description %></pre></dd>
+  </dl>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @client.name %>
-</p>
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              clients_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_client_path(@client), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              client_path(@client),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
 
-<p>
-  <strong>Subdomain:</strong>
-  <%= @client.subdomain %>
-</p>
-
-<p>
-  <strong>Url:</strong>
-  <%= @client.url %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @client.description %>
-</p>
-
-<%= link_to 'Edit', edit_client_path(@client) %> |
-<%= link_to 'Back', clients_path %>
