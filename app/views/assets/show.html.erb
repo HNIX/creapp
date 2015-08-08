@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @asset.client %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @asset.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @asset.description %>
+</p>
+
+<p>
+  <strong>Size:</strong>
+  <%= @asset.size %>
+</p>
+
+<p>
+  <strong>Land size:</strong>
+  <%= @asset.land_size %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @asset.price %>
+</p>
+
+<p>
+  <strong>Price psf:</strong>
+  <%= @asset.price_psf %>
+</p>
+
+<p>
+  <strong>Hide price:</strong>
+  <%= @asset.hide_price %>
+</p>
+
+<p>
+  <strong>Cap rate:</strong>
+  <%= @asset.cap_rate %>
+</p>
+
+<p>
+  <strong>Occupancy:</strong>
+  <%= @asset.occupancy %>
+</p>
+
+<p>
+  <strong>Highlights:</strong>
+  <%= @asset.highlights %>
+</p>
+
+<p>
+  <strong>Year built:</strong>
+  <%= @asset.year_built %>
+</p>
+
+<%= link_to 'Edit', edit_asset_path(@asset) %> |
+<%= link_to 'Back', assets_path %>

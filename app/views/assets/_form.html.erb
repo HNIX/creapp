@@ -1,0 +1,22 @@
+<%= simple_form_for(@asset) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :client %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :size %>
+    <%= f.input :land_size %>
+    <%= f.input :price %>
+    <%= f.input :price_psf %>
+    <%= f.input :hide_price %>
+    <%= f.input :cap_rate %>
+    <%= f.input :occupancy %>
+    <%= f.input :highlights %>
+    <%= f.input :year_built %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
