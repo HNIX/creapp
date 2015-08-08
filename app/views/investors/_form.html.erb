@@ -1,0 +1,22 @@
+<%= simple_form_for(@investor) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :company %>
+    <%= f.input :title %>
+    <%= f.input :linked_in %>
+    <%= f.input :fax %>
+    <%= f.input :price_from %>
+    <%= f.input :price_to %>
+    <%= f.input :verified %>
+    <%= f.input :principal %>
+    <%= f.input :subscribed %>
+    <%= f.association :user %>
+    <%= f.input :phone %>
+    <%= f.input :phone_2 %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

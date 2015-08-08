@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @investor.company %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @investor.title %>
+</p>
+
+<p>
+  <strong>Linked in:</strong>
+  <%= @investor.linked_in %>
+</p>
+
+<p>
+  <strong>Fax:</strong>
+  <%= @investor.fax %>
+</p>
+
+<p>
+  <strong>Price from:</strong>
+  <%= @investor.price_from %>
+</p>
+
+<p>
+  <strong>Price to:</strong>
+  <%= @investor.price_to %>
+</p>
+
+<p>
+  <strong>Verified:</strong>
+  <%= @investor.verified %>
+</p>
+
+<p>
+  <strong>Principal:</strong>
+  <%= @investor.principal %>
+</p>
+
+<p>
+  <strong>Subscribed:</strong>
+  <%= @investor.subscribed %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @investor.user %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @investor.phone %>
+</p>
+
+<p>
+  <strong>Phone 2:</strong>
+  <%= @investor.phone_2 %>
+</p>
+
+<%= link_to 'Edit', edit_investor_path(@investor) %> |
+<%= link_to 'Back', investors_path %>
