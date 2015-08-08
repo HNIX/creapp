@@ -1,54 +1,38 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Campaign -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Campaign %></h1>
+</div>
 
-<p>
-  <strong>Client:</strong>
-  <%= @campaign.client %>
-</p>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:sent) %></dt>
+      <dd><pre class="prettyprint"><%= @campaign.sent %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:send_now) %></dt>
+      <dd><pre class="prettyprint"><%= @campaign.send_now %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:send_on) %></dt>
+      <dd><pre class="prettyprint"><%= @campaign.send_on %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:step_1_complete) %></dt>
+      <dd><pre class="prettyprint"><%= @campaign.step_1_complete %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:step_2_complete) %></dt>
+      <dd><pre class="prettyprint"><%= @campaign.step_2_complete %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:step_3_complete) %></dt>
+      <dd><pre class="prettyprint"><%= @campaign.step_3_complete %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:step_4_complete) %></dt>
+      <dd><pre class="prettyprint"><%= @campaign.step_4_complete %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:authorized) %></dt>
+      <dd><pre class="prettyprint"><%= @campaign.authorized %></pre></dd>
+  </dl>
+</div>
 
-<p>
-  <strong>Asset:</strong>
-  <%= @campaign.asset %>
-</p>
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              campaigns_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_campaign_path(@campaign), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              campaign_path(@campaign),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
 
-<p>
-  <strong>Sent:</strong>
-  <%= @campaign.sent %>
-</p>
-
-<p>
-  <strong>Send now:</strong>
-  <%= @campaign.send_now %>
-</p>
-
-<p>
-  <strong>Send on:</strong>
-  <%= @campaign.send_on %>
-</p>
-
-<p>
-  <strong>Step 1 complete:</strong>
-  <%= @campaign.step_1_complete %>
-</p>
-
-<p>
-  <strong>Step 2 complete:</strong>
-  <%= @campaign.step_2_complete %>
-</p>
-
-<p>
-  <strong>Step 3 complete:</strong>
-  <%= @campaign.step_3_complete %>
-</p>
-
-<p>
-  <strong>Step 4 complete:</strong>
-  <%= @campaign.step_4_complete %>
-</p>
-
-<p>
-  <strong>Authorized:</strong>
-  <%= @campaign.authorized %>
-</p>
-
-<%= link_to 'Edit', edit_campaign_path(@campaign) %> |
-<%= link_to 'Back', campaigns_path %>

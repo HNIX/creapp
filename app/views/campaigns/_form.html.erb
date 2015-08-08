@@ -1,20 +1,58 @@
-<%= simple_form_for(@campaign) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.association :client %>
-    <%= f.association :asset %>
-    <%= f.input :sent %>
-    <%= f.input :send_now %>
-    <%= f.input :send_on %>
-    <%= f.input :step_1_complete %>
-    <%= f.input :step_2_complete %>
-    <%= f.input :step_3_complete %>
-    <%= f.input :step_4_complete %>
-    <%= f.input :authorized %>
+<%= form_for @campaign, :html => { :class => 'form-horizontal form-model' } do |f| %>
+  <div class="form-group">
+    <%= f.label :sent, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.check_box :sent, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :send_now, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.check_box :send_now, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :send_on, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.date_select :send_on, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :step_1_complete, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.check_box :step_1_complete, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :step_2_complete, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.check_box :step_2_complete, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :step_3_complete, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.check_box :step_3_complete, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :step_4_complete, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.check_box :step_4_complete, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :authorized, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.check_box :authorized, :class => 'text-field form-control' %>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-group">
+    <div class='col-md-offset-2 col-md-10'>
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  campaigns_path, :class => 'btn btn-default' %>
+    </div>
   </div>
 <% end %>
