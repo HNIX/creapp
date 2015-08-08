@@ -1,0 +1,20 @@
+<%= simple_form_for(@campaign) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :client %>
+    <%= f.association :asset %>
+    <%= f.input :sent %>
+    <%= f.input :send_now %>
+    <%= f.input :send_on %>
+    <%= f.input :step_1_complete %>
+    <%= f.input :step_2_complete %>
+    <%= f.input :step_3_complete %>
+    <%= f.input :step_4_complete %>
+    <%= f.input :authorized %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

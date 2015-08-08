@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @campaign.client %>
+</p>
+
+<p>
+  <strong>Asset:</strong>
+  <%= @campaign.asset %>
+</p>
+
+<p>
+  <strong>Sent:</strong>
+  <%= @campaign.sent %>
+</p>
+
+<p>
+  <strong>Send now:</strong>
+  <%= @campaign.send_now %>
+</p>
+
+<p>
+  <strong>Send on:</strong>
+  <%= @campaign.send_on %>
+</p>
+
+<p>
+  <strong>Step 1 complete:</strong>
+  <%= @campaign.step_1_complete %>
+</p>
+
+<p>
+  <strong>Step 2 complete:</strong>
+  <%= @campaign.step_2_complete %>
+</p>
+
+<p>
+  <strong>Step 3 complete:</strong>
+  <%= @campaign.step_3_complete %>
+</p>
+
+<p>
+  <strong>Step 4 complete:</strong>
+  <%= @campaign.step_4_complete %>
+</p>
+
+<p>
+  <strong>Authorized:</strong>
+  <%= @campaign.authorized %>
+</p>
+
+<%= link_to 'Edit', edit_campaign_path(@campaign) %> |
+<%= link_to 'Back', campaigns_path %>
