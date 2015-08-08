@@ -1,28 +1,29 @@
-<h1>Listing investors</h1>
-
-<table>
+<%- model_class = Investor -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Investor %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Company</th>
-      <th>Title</th>
-      <th>Linked in</th>
-      <th>Fax</th>
-      <th>Price from</th>
-      <th>Price to</th>
-      <th>Verified</th>
-      <th>Principal</th>
-      <th>Subscribed</th>
-      <th>User</th>
-      <th>Phone</th>
-      <th>Phone 2</th>
-      <th colspan="3"></th>
+      <th>ID</th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:linked_in) %></th>
+      <th><%= model_class.human_attribute_name(:fax) %></th>
+      <th><%= model_class.human_attribute_name(:price_from) %></th>
+      <th><%= model_class.human_attribute_name(:price_to) %></th>
+      <th><%= model_class.human_attribute_name(:verified) %></th>
+      <th><%= model_class.human_attribute_name(:principal) %></th>
+      <th><%= model_class.human_attribute_name(:subscribed) %></th>
+      <th><%= model_class.human_attribute_name(:phone) %></th>
+      <th><%= model_class.human_attribute_name(:phone_2) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @investors.each do |investor| %>
       <tr>
-        <td><%= investor.company %></td>
+        <td><%= investor.id %></td>
         <td><%= investor.title %></td>
         <td><%= investor.linked_in %></td>
         <td><%= investor.fax %></td>
@@ -31,17 +32,23 @@
         <td><%= investor.verified %></td>
         <td><%= investor.principal %></td>
         <td><%= investor.subscribed %></td>
-        <td><%= investor.user %></td>
         <td><%= investor.phone %></td>
         <td><%= investor.phone_2 %></td>
-        <td><%= link_to 'Show', investor %></td>
-        <td><%= link_to 'Edit', edit_investor_path(investor) %></td>
-        <td><%= link_to 'Destroy', investor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l investor.created_at, format: :long %></td>
+        <td>
+          <%= link_to investor_path(investor), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to investor_path(investor), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Investor', new_investor_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_investor_path,
+            :class => 'btn btn-primary' %>

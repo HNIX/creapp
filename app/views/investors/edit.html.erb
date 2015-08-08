@@ -1,6 +1,5 @@
-<h1>Editing investor</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @investor %> |
-<%= link_to 'Back', investors_path %>
+<%- model_class = Investor -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => Investor %></h1>
+</div>
+<%= render :partial => 'form' %>
