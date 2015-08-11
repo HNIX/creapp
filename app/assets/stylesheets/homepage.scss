@@ -1,0 +1,64 @@
+.splashlogo {
+  padding-top: 12px;
+  text-align: center;
+}
+
+.introbox_container {
+  margin: auto;
+  margin-top: 30px;
+  width: 700px;
+}
+
+.introbox {
+  background-color: #C9D6C2;
+  border-radius: 10px;
+  font-size: 19px;
+  padding: 7px 20px 20px 20px;
+  width: 300px;
+  h2 {
+    text-align: center;
+  }
+  p {
+    padding: 3px 0;
+  }
+  .btn-blank {
+    margin-top: 8px;
+    margin-left: 75px;
+  }
+  .btn-github {
+    margin-top: 8px;
+    margin-left: 60px;
+  }
+  form {
+    margin: 0;
+  }
+  select#skill_name {
+    margin: 1px 20px 1px 26px;
+    width: 160px;
+  }
+}
+
+.intro-explanation-header {
+  padding-top: 37px;
+  text-align: center;
+}
+
+.intro-workflow-img {
+  padding-left: 30px;
+}
+
+.intro-workflow-desc {
+  margin: auto;
+  width: 210px;
+  text-align: center;
+}
+
+.intro-workflow-signup {
+  padding: 50px;
+  text-align: center;
+}
+
+.create-job-listing {
+  padding-left: 230px;
+  padding-top: 10px;
+}

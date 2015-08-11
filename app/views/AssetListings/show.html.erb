@@ -1,0 +1,44 @@
+<%- model_class = AssetListing -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => AssetListing %></h1>
+</div>
+
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
+      <dd><pre class="prettyprint"><%= asset_listing.name %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:description) %></dt>
+      <dd><pre class="prettyprint"><%= asset_listing.description %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:size) %></dt>
+      <dd><pre class="prettyprint"><%= asset_listing.size %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:land_size) %></dt>
+      <dd><pre class="prettyprint"><%= asset_listing.land_size %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:price) %></dt>
+      <dd><pre class="prettyprint"><%= asset_listing.price %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:price_psf) %></dt>
+      <dd><pre class="prettyprint"><%= asset_listing.price_psf %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:hide_price) %></dt>
+      <dd><pre class="prettyprint"><%= asset_listing.hide_price %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:cap_rate) %></dt>
+      <dd><pre class="prettyprint"><%= asset_listing.cap_rate %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:occupancy) %></dt>
+      <dd><pre class="prettyprint"><%= asset_listing.occupancy %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:highlights) %></dt>
+      <dd><pre class="prettyprint"><%= asset_listing.highlights %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:year_built) %></dt>
+      <dd><pre class="prettyprint"><%= asset_listing.year_built %></pre></dd>
+  </dl>
+</div>
+
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              assets_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_asset_path(asset_listing), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              asset_path(asset_listing),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
+

@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :asset do
+  factory :asset_listing do
     client nil
 name "MyString"
 description "MyText"

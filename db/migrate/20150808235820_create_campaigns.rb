@@ -2,7 +2,7 @@ class CreateCampaigns < ActiveRecord::Migration
   def change
     create_table :campaigns do |t|
       t.references :client, index: true
-      t.references :asset, index: true
+      t.references :asset_listing, index: true
       t.boolean :sent
       t.boolean :send_now
       t.date :send_on

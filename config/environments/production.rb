@@ -19,20 +19,20 @@ Rails.application.configure do
   # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
   # config.action_dispatch.rack_cache = true
 
-  # Disable Rails's static asset server (Apache or nginx will already do this).
+  # Disable Rails's static asset_listing server (Apache or nginx will already do this).
   config.serve_static_assets = false
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
-  # config.assets.css_compressor = :sass
+  # config.AssetListings.css_compressor = :sass
 
-  # Do not fallback to assets pipeline if a precompiled asset is missed.
+  # Do not fallback to AssetListings pipeline if a precompiled asset_listing is missed.
   config.assets.compile = false
 
-  # Generate digests for assets URLs.
+  # Generate digests for AssetListings URLs.
   config.assets.digest = true
 
-  # `config.assets.precompile` has moved to config/initializers/assets.rb
+  # `config.AssetListings.precompile` has moved to config/initializers/AssetListings.rb
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
@@ -53,12 +53,12 @@ Rails.application.configure do
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
-  # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  # config.action_controller.asset_host = "http://assets.example.com"
+  # Enable serving of images, stylesheets, and JavaScripts from an asset_listing server.
+  # config.action_controller.asset_host = "http://AssetListings.example.com"
 
-  # Precompile additional assets.
-  # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-  # config.assets.precompile += %w( search.js )
+  # Precompile additional AssetListings.
+  # application.js, application.css, and all non-JS/CSS in app/AssetListings folder are already added.
+  # config.AssetListings.precompile += %w( search.js )
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

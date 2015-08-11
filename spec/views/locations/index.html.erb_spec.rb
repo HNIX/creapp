@@ -9,7 +9,7 @@ RSpec.describe "locations/index", type: :view do
         :latitude => 1.5,
         :user => nil,
         :company => nil,
-        :asset => nil
+        :asset_listing => nil
       ),
       Location.create!(
         :address => "Address",
@@ -17,7 +17,7 @@ RSpec.describe "locations/index", type: :view do
         :latitude => 1.5,
         :user => nil,
         :company => nil,
-        :asset => nil
+        :asset_listing => nil
       )
     ])
   end

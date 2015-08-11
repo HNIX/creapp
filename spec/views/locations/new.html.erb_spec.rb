@@ -8,7 +8,7 @@ RSpec.describe "locations/new", type: :view do
       :latitude => 1.5,
       :user => nil,
       :company => nil,
-      :asset => nil
+      :asset_listing => nil
     ))
   end
 

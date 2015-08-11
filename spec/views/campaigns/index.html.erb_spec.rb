@@ -5,7 +5,7 @@ RSpec.describe "campaigns/index", type: :view do
     assign(:campaigns, [
       Campaign.create!(
         :client => nil,
-        :asset => nil,
+        :asset_listing => nil,
         :sent => false,
         :send_now => false,
         :step_1_complete => false,
@@ -16,7 +16,7 @@ RSpec.describe "campaigns/index", type: :view do
       ),
       Campaign.create!(
         :client => nil,
-        :asset => nil,
+        :asset_listing => nil,
         :sent => false,
         :send_now => false,
         :step_1_complete => false,

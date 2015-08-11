@@ -6,7 +6,7 @@ RSpec.describe "tenants/edit", type: :view do
       :name => "MyString",
       :size => 1,
       :description => "MyText",
-      :asset => nil
+      :asset_listing => nil
     ))
   end
 

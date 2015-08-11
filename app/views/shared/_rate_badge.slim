@@ -1,0 +1,7 @@
+.rate-badge.pull-right
+  = client_rate_text(programmer)
+  - if !programmer.unavailable?
+    br
+    small
+      .rate-badge-availability.pull-right
+        = programmer.calculated_availability.to_s.humanize

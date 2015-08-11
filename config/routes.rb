@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :investors
 
-  resources :assets
+  resources :asset_listings
 
   resources :locations
 
@@ -22,7 +22,16 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'landings#index'
+  root to: 'landings#main'
+
+  resources :users, only: [:edit, :update] do
+    resource :investor, only: [:edit, :update]
+    resource :client, only: [:new, :create, :edit, :update]
+    # resource :payment_info, only: [:edit] do
+    #   # The Balanced Payments API scrubs the _method parameter, so :update must be a POST
+    #   post :update, defaults: { format: :json }
+    # end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

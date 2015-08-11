@@ -7,13 +7,13 @@ RSpec.describe "tenants/index", type: :view do
         :name => "Name",
         :size => 1,
         :description => "MyText",
-        :asset => nil
+        :asset_listing => nil
       ),
       Tenant.create!(
         :name => "Name",
         :size => 1,
         :description => "MyText",
-        :asset => nil
+        :asset_listing => nil
       )
     ])
   end

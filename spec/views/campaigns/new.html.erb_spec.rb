@@ -4,7 +4,7 @@ RSpec.describe "campaigns/new", type: :view do
   before(:each) do
     assign(:campaign, Campaign.new(
       :client => nil,
-      :asset => nil,
+      :asset_listing => nil,
       :sent => false,
       :send_now => false,
       :step_1_complete => false,

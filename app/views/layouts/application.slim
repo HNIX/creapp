@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+    - title = @custom_title || 'Find investors'
+    - if user_signed_in?
+      title
+        = "CREConsole | #{title}"
+    - else
+      title
+        = "Investors | #{title} | CREConsole"
+    = favicon_link_tag 'favicon.ico'
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    meta name="keywords" content="open source bounty, open source, programming career, software job, programming job, freelance programming, software career, open source job"
+    - if @custom_description
+      meta name="description" content="#{@custom_description}"
+    = analytics_init if Rails.env.production?
+  body
+    = render partial: 'elements/navbar'
+    .main-content
+      = render partial: 'shared/flash_messages'
+      = yield
+      .footer-clear
+    .navbar.navbar-fixed-bottom
+      .footer-content
+        | &copy; CREConsole
+        = " #{Time.now.year}"
+        span.footer-link
+          = link_to 'View Source', 'https://github.com/CodeDoor/codedoor', target: '_blank'
+        span.footer-link
+          = link_to 'Terms of Use', '/terms', target: '_blank'
+        span.footer-link
+          = link_to 'Blog', '/blog', target: '_blank'
+        span.footer-link
+          | rcheng@codedoor.com

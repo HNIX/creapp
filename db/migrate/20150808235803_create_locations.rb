@@ -6,7 +6,7 @@ class CreateLocations < ActiveRecord::Migration
       t.float :latitude
       t.references :user, index: true
       t.references :company, index: true
-      t.references :asset, index: true
+      t.references :asset_listing, index: true
 
       t.timestamps
     end

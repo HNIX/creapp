@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150808235838) do
+ActiveRecord::Schema.define(version: 20150811042443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20150808235838) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "assets", force: true do |t|
+  create_table "asset_listings", force: true do |t|
     t.integer  "client_id"
     t.string   "name"
     t.text     "description"
@@ -64,27 +64,14 @@ ActiveRecord::Schema.define(version: 20150808235838) do
     t.string   "year_built"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "state"
+    t.string   "title"
+    t.date     "delivery_date"
+    t.string   "visibility"
+    t.boolean  "ended"
   end
 
-  add_index "assets", ["client_id"], name: "index_assets_on_client_id", using: :btree
-
-  create_table "campaigns", force: true do |t|
-    t.integer  "client_id"
-    t.integer  "asset_id"
-    t.boolean  "sent"
-    t.boolean  "send_now"
-    t.date     "send_on"
-    t.boolean  "step_1_complete"
-    t.boolean  "step_2_complete"
-    t.boolean  "step_3_complete"
-    t.boolean  "step_4_complete"
-    t.boolean  "authorized"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "campaigns", ["asset_id"], name: "index_campaigns_on_asset_id", using: :btree
-  add_index "campaigns", ["client_id"], name: "index_campaigns_on_client_id", using: :btree
+  add_index "asset_listings", ["client_id"], name: "index_asset_listings_on_client_id", using: :btree
 
   create_table "clients", force: true do |t|
     t.integer  "user_id"
@@ -94,6 +81,7 @@ ActiveRecord::Schema.define(version: 20150808235838) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "company"
   end
 
   add_index "clients", ["user_id"], name: "index_clients_on_user_id", using: :btree
@@ -122,6 +110,11 @@ ActiveRecord::Schema.define(version: 20150808235838) do
     t.string   "phone_2"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "visibility"
+    t.string   "state"
+    t.boolean  "qualified"
+    t.float    "modified_rank_score"
+    t.integer  "rank_score"
   end
 
   add_index "investors", ["company_id"], name: "index_investors_on_company_id", using: :btree
