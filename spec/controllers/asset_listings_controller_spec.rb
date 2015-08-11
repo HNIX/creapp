@@ -37,7 +37,7 @@ RSpec.describe AssetListingsController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all AssetListings as @AssetListings" do
+    it "assigns all asset_listings as @asset_listings" do
       asset = AssetListing.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:asset_listings)).to eq([asset])
@@ -149,7 +149,7 @@ RSpec.describe AssetListingsController, type: :controller do
       }.to change(AssetListing, :count).by(-1)
     end
 
-    it "redirects to the AssetListings list" do
+    it "redirects to the asset_listings list" do
       asset = AssetListing.create! valid_attributes
       delete :destroy, {:id => asset.to_param}, valid_session
       expect(response).to redirect_to(assets_url)

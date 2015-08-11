@@ -1,0 +1,74 @@
+= form_for [@asset_listing], url: {action: action}, html: {class: 'form-horizontal'} do |f|
+  .span8
+    .control-group class="#{model_attribute_class(@asset_listing, :title)}"
+      .control-label
+        = f.label :title, 'Asset Title'
+      .controls
+        = f.text_field :title, placeholder: 'Listing Title'
+        = render partial: 'shared/help_inline', locals: {model: @asset_listing, attribute: :title}
+    .control-group class="#{model_attribute_class(@asset_listing, :name)}"
+      .control-label
+        = f.label :name, 'Asset Title'
+      .controls
+        = f.text_field :name, placeholder: 'Property Name'
+        = render partial: 'shared/help_inline', locals: {model: @asset_listing, attribute: :name}
+    .control-group class="#{model_attribute_class(@asset_listing, :description)}"
+      .control-label
+        = f.label :description, 'Description'
+      .controls
+        = render partial: 'shared/help_block', locals: {model: @asset_listing, attribute: :description}
+        = f.text_area :description, placeholder: 'A description of the property.', class: 'span6 longer-text'
+
+    /.control-group class="#{model_attribute_class(@asset_listing, :price)}"
+    /  .control-label
+    /    = f.label :price, 'Asking Price'
+    /  .controls
+    /    = render partial: 'shared/help_block', locals: {model: @asset_listing, attribute: :price}
+    /    label class='radio'
+    /      = f.radio_button :suggested_rate_type, :hourly
+    /      | Hourly or daily rate
+    /    label class='radio'
+    /      = f.radio_button :suggested_rate_type, :fixed_price
+    /      | Fixed price for project
+
+    .control-group class="#{model_attribute_class(@asset_listing, :price)}"
+      .control-label
+        = f.label :price, 'Asking Price'
+      .controls
+        ' $
+        = f.text_field :price, class: 'short-field'
+        = render partial: 'shared/help_inline', locals: {model: @asset_listing, attribute: :price}
+
+    .control-group class="#{model_attribute_class(@asset_listing, :offer_date)}"
+      .control-label
+        = f.label :offer_date
+      .controls
+        = render partial: 'shared/help_block', locals: {model: @asset_listing, attribute: :offer_date}
+        = f.date_select :offer_date, {default: Date.today + 60}, class: 'date-field'
+
+    .control-group class="#{model_attribute_class(@job_listing, :visibility)}"
+      .control-label
+        = f.label :visibility
+      .controls
+        = render partial: 'shared/help_block', locals: {model: @asset_listing, attribute: :visibility}
+        label class='radio'
+          = f.radio_button :visibility, :public
+          | Public (Visible to search engines)
+        label class='radio'
+          = f.radio_button :visibility, :creconsole
+          | Visible to other CREConsole users
+        label class='radio'
+          = f.radio_button :visibility, :private
+          | Not visible
+
+    - if action == :update
+      .control-label
+        = f.label :ended
+      .controls
+        label class="checkbox"
+          = f.check_box :ended
+          | The job listing has ended, and I no longer need investors.
+
+    .offset2.span5
+      p
+        = f.submit 'Save', class: 'btn', data: {disable_with: 'Submitting...'}

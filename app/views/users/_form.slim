@@ -33,13 +33,13 @@
         | .
 - if !user.investor.present? && !user.client.present?
   .row
-    .span1
     .span3
       = f.submit 'Create Investor Account', class: 'btn', data: {disable_with: 'Submitting...'}, name: :create_investor
+  .row
     .span3
       = f.submit 'Create Client Account', class: 'btn', data: {disable_with: 'Submitting...'}, name: :create_client
 - else
   .control-group
     .controls
       = f.submit 'Save', class: 'btn', data: {disable_with: 'Submitting...'}
-= javascript_include_tag 'settings/user_country'
+/= javascript_include_tag 'settings/user_country'

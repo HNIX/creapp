@@ -1,6 +1,8 @@
 module ApplicationHelper
   def model_has_error?(model, attribute)
-    model.errors.has_key?(attribute)
+    if model.present?
+      model.errors.has_key?(attribute)
+    end
   end
 
   def model_attribute_class(model, attribute)

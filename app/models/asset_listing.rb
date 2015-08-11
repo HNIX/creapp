@@ -36,7 +36,7 @@ class AssetListing < ActiveRecord::Base
   validates :title, presence: true
   validates :description, presence: true
   validates :offer_date, presence: true
-  validates :visibility, inclusion: { in: ['public', 'private'], message: 'must be selected' }
+  validates :visibility, inclusion: { in: ['public', 'creconsole', 'private'], message: 'must be selected' }
 
   validate :offer_date_in_future
 

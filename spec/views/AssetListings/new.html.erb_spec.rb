@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "AssetListings/new", type: :view do
+RSpec.describe "asset_listings/new", type: :view do
   before(:each) do
     assign(:asset_listing, AssetListing.new(
       :client => nil,

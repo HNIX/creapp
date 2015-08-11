@@ -1,7 +1,7 @@
 .rate-badge.pull-right
-  = client_rate_text(programmer)
-  - if !programmer.unavailable?
+  = client_rate_text(investor)
+  - if !investor.unavailable?
     br
     small
       .rate-badge-availability.pull-right
-        = programmer.calculated_availability.to_s.humanize
+        = investor.calculated_availability.to_s.humanize

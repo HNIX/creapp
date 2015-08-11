@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "AssetListings/edit", type: :view do
+RSpec.describe "asset_listings/edit", type: :view do
   before(:each) do
     asset_listing = assign(:asset_listing, AssetListing.create!(
       :client => nil,

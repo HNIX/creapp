@@ -33,16 +33,14 @@ class ClientsController < ApplicationController
   # POST /clients.json
   def create
     @client = Client.new(client_params)
-    @client.user = current_user
+    @client.user = current_user.id
+    if @client.save
+      flash[:notice] = 'Your client account has been created'
+      redirect_to client_signed_up_path
 
-    respond_to do |format|
-      if @client.save
-        format.html { redirect_to @client, notice: 'Client was successfully created.' }
-        format.json { render :show, status: :created, location: @client }
-      else
-        format.html { render :new }
-        format.json { render json: @client.errors, status: :unprocessable_entity }
-      end
+    else
+      flash[:alert] = 'Your client account could not be created.'
+      render :new
     end
   end
 
@@ -50,15 +48,12 @@ class ClientsController < ApplicationController
   # PATCH/PUT /clients/1.json
   def update
     @client = Client.find(current_user.client.id)
-    respond_to do |format|
-      if @client.update(client_params)
-        format.html { redirect_to @client, notice: 'Client was successfully updated.' }
-        format.json { render :show, status: :ok, location: @client }
-      else
-        format.html { render :edit }
-        format.json { render json: @client.errors, status: :unprocessable_entity }
-      end
+    if @client.update(client_params)
+      flash[:notice] = 'Your client account has been updated.'
+    else
+      flash[:alert] = 'Your client account could not be updated.'
     end
+    render :edit
   end
 
   # DELETE /clients/1
@@ -79,7 +74,7 @@ class ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:user_id, :name, :subdomain, :url, :description)
+      params.require(:client).permit(:user_id, :name, :subdomain, :url, :description, :company)
     end
 
     def ensure_no_client

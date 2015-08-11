@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "AssetListings/index", type: :view do
+RSpec.describe "asset_listings/index", type: :view do
   before(:each) do
     assign(:asset_listings, [
       AssetListing.create!(
@@ -34,7 +34,7 @@ RSpec.describe "AssetListings/index", type: :view do
     ])
   end
 
-  it "renders a list of AssetListings" do
+  it "renders a list of asset_listings" do
     render
     assert_select "tr>td", :text => nil.to_s, :count => 2
     assert_select "tr>td", :text => "Name".to_s, :count => 2

@@ -52,7 +52,7 @@ class Investor < ActiveRecord::Base
     end
   end
 
-  #self.per_page = 10
+  self.per_page = 10
 
  #refactor to set the investor status
   # def self.onsite_status_description(status)

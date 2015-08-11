@@ -17,7 +17,7 @@ html
       meta name="description" content="#{@custom_description}"
     = analytics_init if Rails.env.production?
   body
-    = render partial: 'elements/navbar'
+    = render partial: 'shared/navbar'
     .main-content
       = render partial: 'shared/flash_messages'
       = yield

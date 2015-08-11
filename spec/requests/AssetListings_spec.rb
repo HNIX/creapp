@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Assets", type: :request do
-  describe "GET /AssetListings" do
+  describe "GET /asset_listings" do
     it "works! (now write some real specs)" do
       get assets_path
       expect(response).to have_http_status(200)

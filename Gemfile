@@ -7,9 +7,9 @@ gem 'rails', '4.1.4'
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
-# Use Uglifier as compressor for JavaScript AssetListings
+# Use Uglifier as compressor for JavaScript asset_listings
 gem 'uglifier', '>= 1.3.0'
-# Use CoffeeScript for .js.coffee AssetListings and views
+# Use CoffeeScript for .js.coffee asset_listings and views
 gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
@@ -54,6 +54,10 @@ gem 'tzinfo-data'
 gem "slim-rails"
 gem 'state_machine'
 gem 'ruby-graphviz', :require => 'graphviz'
+gem 'will_paginate', '~> 3.0.6'
+gem 'nested_form'
+gem 'rails_autolink'
+
 
 group :development do
   gem 'better_errors'

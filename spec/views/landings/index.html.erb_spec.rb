@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe "landings/index.html.erb", type: :view do
+RSpec.describe "landings/index.slim", type: :view do
   pending "add some examples to (or delete) #{__FILE__}"
 end

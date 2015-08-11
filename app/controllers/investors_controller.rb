@@ -22,8 +22,8 @@ class InvestorsController < ApplicationController
     @show_back_to_search = params[:search].present?
 
     @custom_title = @investor.user.full_name
-    @custom_description = "#{@custom_title} - #{@investor.title} - #{@investor.user.location_text}"
-    @custom_description += " - #{@investor.description}" if @investor.description.present?
+    @custom_description = "#{@custom_title} - #{@investor.title}" #" - #{@investor.user.location_text}"
+    #@custom_description += " - #{@investor.description}" if @investor.description.present?
   end
 
   # GET /investors/new
@@ -103,6 +103,6 @@ class InvestorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def update_investor_params
-      params.require(:investor).permit(:company_id, :title, :linked_in, :fax, :price_from, :price_to, :verified, :principal, :subscribed, :user_id, :phone, :phone_2)
+      params.require(:investor).permit(:company_id, :title, :linked_in, :fax, :price_from, :price_to, :verified, :principal, :subscribed, :user_id, :phone, :phone_2, :visibility)
     end
 end

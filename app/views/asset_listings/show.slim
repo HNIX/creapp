@@ -1,0 +1,20 @@
+.span3
+  - if @show_back_to_search
+    = render partial: 'shared/back_to_search'
+.span6
+  h3
+    = @asset_listing.title
+  p
+    = auto_link(simple_format(@asset_listing.description), html: { target: "_blank" })
+  p
+    ' Asking Price:
+    = @asset_listing.price
+
+  p
+    ' Call for offers date:
+    = @asset_listing.offer_date
+
+.span3
+  - unless @asset_listing.client.user == current_user
+    strong
+      = link_to 'Offer', new_application_new_asset_path(asset_listing_id: @asset_listing.id), class: 'btn btn-lg btn-success huge-button'

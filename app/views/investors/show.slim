@@ -1,0 +1,100 @@
+.row
+  .span3
+    - if @show_back_to_search
+      = render partial: 'shared/back_to_search'
+  .span6
+    /h4
+    /  = @investor.user.full_name
+    /  = render partial: 'shared/rate_badge', locals: {investor: @investor}
+    p
+      = @investor.title
+    /p
+    /  = @investor.user.location_text
+    /p
+    /  ' Skills:
+    /  = @investor.skills.map(&:name).join(', ')
+    /= investor.onsite_status_description(@investor.onsite_status)
+    /- if @investor.contract_to_hire?
+    /  p
+    /    | Will consider contract-to-hire.
+    /- unless @investor.description.blank?
+    /  h4
+    /    | Description
+    /  p
+    /    = auto_link(simple_format(@investor.description), html: { target: "_blank" })
+    /
+    /- if @investor.show_repos? || @investor.ohloh_username.present? || @investor.show_portfolio?
+    /  h4
+    /    | Portfolio
+    /  - if @investor.show_repos?
+    /    strong
+    /      ' GitHub /
+    /    = link_to @investor.username, "https://github.com/#{@investor.username}", target: '_blank'
+    /    - @investor.github_repos.shown[0..(GithubRepo::SHOWN-1)].each do |repo|
+    /      = render partial: 'investors/display_github_repo', locals: {investor: @investor, repo: repo}
+    /
+    /    - if @investor.github_repos.shown.size > GithubRepo::SHOWN
+    /      p
+    /        strong
+    /          a id="show-more-repos"
+    /            | Show More Repos
+    /        javascript:
+    //          $('#show-more-repos').on('click', function(){ $('#hidden-repos').show(); $('#show-more-repos').hide(); });
+    /
+    /      #hidden-repos.hidden
+    /        - @investor.github_repos.shown[(GithubRepo::SHOWN)..(-1)].each do |repo|
+    /          = render partial: 'investors/display_github_repo', locals: {investor: @investor, repo: repo}
+    /
+    /  - if @investor.ohloh_username.present?
+    /    strong
+    /      | Ohloh Account
+    /    p
+    /      = link_to @investor.ohloh_username, "http://www.ohloh.net/accounts/#{@investor.ohloh_username}", target: '_blank'
+    /
+    /  - if @investor.show_portfolio?
+    /    strong
+    /      | Projects
+    /    - @investor.portfolio_items.each do |project|
+    /      p
+    /        .row
+    /          .span6
+    /            = link_to project.title, project.url, target: '_blank'
+    /            - unless project.description.blank?
+    /              = auto_link(simple_format(project.description), html: { target: "_blank" })
+    /
+    /
+    /- if @investor.show_resume?
+    /  h4
+    /    | Résumé
+    /  - @investor.resume_items.each do |resume|
+    /    p
+    /      strong
+    /        = resume.title
+    /      br
+    /      = resume.company_name
+    /      br
+    /      = resume.duration_text
+    /      br
+    /      = auto_link(simple_format(resume.description), html: { target: "_blank" })
+    /
+    /- if @investor.show_education?
+    /  h4
+    /    | Education
+    /  - @investor.education_items.each do |education|
+    /    p
+    /      strong
+    /        = education.school_name
+    /      br
+    /      = education.degree_and_major
+    /      br
+    /      = education.duration_text
+    /      br
+    /      = auto_link(simple_format(education.description), html: { target: "_blank" })
+  .span3
+    - unless @investor.user == current_user
+      strong
+        = link_to 'Contact', new_job_path(investor_id: @investor.id), class: 'btn btn-lg btn-success huge-button'
+      - unless user_signed_in?
+        br
+        br
+          | To contact this investor, you need to sign in.

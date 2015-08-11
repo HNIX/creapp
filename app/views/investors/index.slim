@@ -1,0 +1,26 @@
+.span3
+  = render partial: 'shared/search_form'
+.span6
+  - if @investors.empty?
+    p
+      | No investors have matched your search.
+    p
+      ' Feel free to create a
+      a href="#{new_job_listing_path}"
+        | job listing
+      |, and relevant top investors will offer.  It is free!
+  - else
+    hr
+    - @investors.each do |investor|
+      /.pull-right
+      /  = render partial: 'shared/rate_badge', locals: {investor: investor}
+      h4
+        = link_to(investor.user.full_name, investor_path(investor, search: true))
+      p
+        = investor.title
+      /p
+      /  = investor.user.location_text
+      /p
+      /  = simple_format(programmer.description.to_s.truncate(500))
+      /hr
+    = will_paginate @posts
