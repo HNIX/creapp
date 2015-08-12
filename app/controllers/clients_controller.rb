@@ -33,7 +33,7 @@ class ClientsController < ApplicationController
   # POST /clients.json
   def create
     @client = Client.new(client_params)
-    @client.user = current_user.id
+    @client.user = current_user
     if @client.save
       flash[:notice] = 'Your client account has been created'
       redirect_to client_signed_up_path

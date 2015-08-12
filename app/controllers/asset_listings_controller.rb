@@ -5,7 +5,7 @@ class AssetListingsController < ApplicationController
 
   def index
     if user_signed_in?
-      @asset_listings = AssetListing.where(visibility: :public)
+      @asset_listings = AssetListing.where(visibility: [:public, :creconsole])
     else
       @asset_listings = AssetListing
     end

@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Asset:
+  = @asset_message.asset_id
+p
+  strong Sender is client:
+  = @asset_message.sender_is_client
+p
+  strong Content:
+  = @asset_message.content
+
+= link_to 'Edit', edit_asset_message_path(@asset_message)
+'|
+= link_to 'Back', asset_messages_path

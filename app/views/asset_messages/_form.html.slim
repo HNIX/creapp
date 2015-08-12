@@ -1,0 +1,18 @@
+= form_for @asset_message do |f|
+  - if @asset_message.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@asset_message.errors.count, "error")} prohibited this asset_message from being saved:"
+      ul
+        - @asset_message.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :asset_id
+    = f.number_field :asset_id
+  .field
+    = f.label :sender_is_client
+    = f.check_box :sender_is_client
+  .field
+    = f.label :content
+    = f.text_area :content
+  .actions = f.submit

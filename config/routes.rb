@@ -1,31 +1,44 @@
 Rails.application.routes.draw do
-  get 'landings/index'
-
-  resources :companies
-
-  resources :campaigns
-
-  resources :clients
-
-  resources :investors
-
-  resources :asset_listings
-
-  resources :locations
-
-  resources :tenants
-
+  #devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users, controllers: {registrations: "users/registrations", sessions: "users/sessions", passwords: "users/passwords"}, skip: [:sessions, :registrations]
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
+
+  #->Prelang (user_login:devise/stylized_paths)
+  devise_scope :user do
+    get    "login"   => "users/sessions#new",         as: :new_user_session
+    post   "login"   => "users/sessions#create",      as: :user_session
+    delete "signout" => "users/sessions#destroy",     as: :destroy_user_session
+
+    get    "signup"  => "users/registrations#new",    as: :new_user_registration
+    post   "signup"  => "users/registrations#create", as: :user_registration
+    put    "signup"  => "users/registrations#update", as: :update_user_registration
+    get    "account" => "users/registrations#edit",   as: :edit_user_registration
+  end
+
   root to: 'landings#main'
 
+  resources :investors, only: [:index, :show]
+
+  resources :assets, only: [:index, :new, :create, :edit] do
+    get :new_application, on: :new
+    post :create_application, on: :new
+
+    post :create_message, on: :member
+    post :cancel, on: :member
+    post :offer, on: :member
+    post :decline, on: :member
+    post :start, on: :member
+    post :finish, on: :member
+  end
+
+  resources :asset_listings, only: [:index, :show, :new, :edit, :create, :update]
+
   resources :users, only: [:edit, :update] do
-    resource :investor, only: [:edit, :update]
+    resource :investor, only: [:edit, :update] do
+      #post :verify_contribution, defaults: { format: :json }
+    end
     resource :client, only: [:new, :create, :edit, :update]
     # resource :payment_info, only: [:edit] do
     #   # The Balanced Payments API scrubs the _method parameter, so :update must be a POST
@@ -33,65 +46,18 @@ Rails.application.routes.draw do
     # end
   end
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  #resources :blog, only: [:index, :show]
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+  get '/terms', to: 'legal#terms'
+  get '/sitemap.xml.gz', to: 'sitemaps#show'
+  get '/login', to: 'login#main'
 
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  get 'landings/index'
 
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+  resources :companies
+  resources :locations
+  resources :tenants
 
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
 
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
-  
-  #->Prelang (user_login:devise/stylized_paths)
-  devise_scope :user do
-    get    "login"   => "users/sessions#new",         as: :new_user_session
-    post   "login"   => "users/sessions#create",      as: :user_session
-    delete "signout" => "users/sessions#destroy",     as: :destroy_user_session
-    
-    get    "signup"  => "users/registrations#new",    as: :new_user_registration
-    post   "signup"  => "users/registrations#create", as: :user_registration
-    put    "signup"  => "users/registrations#update", as: :update_user_registration
-    get    "account" => "users/registrations#edit",   as: :edit_user_registration
-  end
 
 end

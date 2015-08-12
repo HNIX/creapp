@@ -1,0 +1,25 @@
+h1 Listing asset_messages
+
+table
+  thead
+    tr
+      th Asset
+      th Sender is client
+      th Content
+      th
+      th
+      th
+
+  tbody
+    - @asset_messages.each do |asset_message|
+      tr
+        td = asset_message.asset_id
+        td = asset_message.sender_is_client
+        td = asset_message.content
+        td = link_to 'Show', asset_message
+        td = link_to 'Edit', edit_asset_message_path(asset_message)
+        td = link_to 'Destroy', asset_message, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Asset message', new_asset_message_path

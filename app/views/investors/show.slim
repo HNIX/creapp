@@ -3,9 +3,9 @@
     - if @show_back_to_search
       = render partial: 'shared/back_to_search'
   .span6
-    /h4
-    /  = @investor.user.full_name
-    /  = render partial: 'shared/rate_badge', locals: {investor: @investor}
+    h4
+      = @investor.user.full_name
+      /= render partial: 'shared/rate_badge', locals: {investor: @investor}
     p
       = @investor.title
     /p
@@ -93,7 +93,7 @@
   .span3
     - unless @investor.user == current_user
       strong
-        = link_to 'Contact', new_job_path(investor_id: @investor.id), class: 'btn btn-lg btn-success huge-button'
+        = link_to 'Contact', new_asset_path(investor_id: @investor.id), class: 'btn btn-lg btn-success huge-button'
       - unless user_signed_in?
         br
         br

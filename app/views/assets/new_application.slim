@@ -1,0 +1,68 @@
+= form_for [@asset], url: {action: :create_application}, html: {class: 'form-horizontal'} do |f|
+  .span8
+    = f.hidden_field :asset_listing_id, value: @asset_listing.id
+    .control-group
+      .control-label
+      .controls
+        = @asset_listing.title
+    .control-group
+      .control-label
+        | Message
+      .controls
+        = text_area_tag 'asset[asset_messages_attributes][][content]', @asset.asset_messages.first.present? ? @asset.asset_messages.first.content : '', class: 'span5 longer-text'
+    /.control-group
+    /  .control-label
+    /    | Rate Type
+    /  .controls
+    /    label class='radio'
+    /      = f.radio_button :rate_type, :hourly
+    /      | Hourly or daily rate
+    /    label class='radio'
+    /      = f.radio_button :rate_type, :fixed_price
+    /      | Fixed price for project
+
+    /span id='hourly_rate_fields' class="#{@asset.hourly? ? '' : 'hidden'}"
+    /  .control-group class="#{model_attribute_class(@asset, :hourly_rate)}"
+    /    .control-label
+    /      = f.label :hourly_rate, 'Rate Per Hour'
+    /    .controls
+    /      ' $
+    /      = f.text_field :hourly_rate, class: 'short-field'
+    /      = render partial: 'shared/help_inline', locals: {model: @asset, attribute: :hourly_rate}
+
+    /span id='fixed_rate_fields' class="#{@asset.fixed_price? ? '' : 'hidden'}"
+    /  .control-group class="#{model_attribute_class(@asset, :fixed_rate)}"
+    /    .control-label
+    /      = f.label :fixed_rate, 'Rate For Project'
+    /    .controls
+    /      ' $
+    /      = f.text_field :fixed_rate, class: 'short-field'
+    /      = render partial: 'shared/help_inline', locals: {model: @asset, attribute: :fixed_rate}
+
+    /javascript:
+    //  $('document').ready(function() {
+    //    var refreshFields = function() {
+    //      current_rate_type = $("input[name='asset[rate_type]']:checked").val();
+    //      if (current_rate_type == 'hourly') {
+    //        $('#hourly_rate_fields').show();
+    //        $('#fixed_rate_fields').hide();
+    //      } else if (current_rate_type == 'fixed_price') {
+    //        $('#hourly_rate_fields').hide();
+    //        $('#fixed_rate_fields').show();
+    //      } else {
+    //        $('#hourly_rate_fields').hide();
+    //        $('#fixed_rate_fields').hide();
+    //      }
+    //    };
+    //
+    //    $('#asset_rate_type_hourly').on('click', refreshFields);
+    //    $('#asset_rate_type_fixed_price').on('click', refreshFields);
+    //    refreshFields();
+    //  });
+
+    .offset2.span5
+      .pull-right
+        = f.submit 'Send and Offer Bid', class: 'btn btn-success', name: 'offer-contract', data: {disable_with: 'Submitting...'}
+      p
+        = f.submit 'Send Message', class: 'btn', data: {disable_with: 'Submitting...'}
+  = render partial: 'assets/asset_info'

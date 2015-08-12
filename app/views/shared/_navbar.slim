@@ -2,7 +2,7 @@ div class="navbar"
   div class="navbar-inner"
     strong
       a class="pull-left" href="#{root_path}"
-        | CodeDoor
+        | CREConsole
     - if user_signed_in?
       a class="pull-right" href="#{destroy_user_session_path}" data-method="delete"
         | Log out
@@ -12,10 +12,10 @@ div class="navbar"
       - if current_user.client.present?
         a class="pull-left" href="#{investors_path}"
           | Search
-      /- if current_user.completed_investor_account? || current_user.client.present?
-      /  a class="pull-left" href="#{jobs_path}"
-      /    | Jobs
-      / Only show if if user is client and not investor
+      - if current_user.completed_investor_account? || current_user.client.present?
+        a class="pull-left" href="#{assets_path}"
+          | Assets
+        /Only show if if user is client and not investor
       - unless current_user.client.present? && !current_user.completed_investor_account?
         a class="pull-left" href="#{asset_listings_path}"
           | Find Properties

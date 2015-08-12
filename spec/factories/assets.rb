@@ -1,17 +1,14 @@
 FactoryGirl.define do
-  factory :asset_listing do
-    client nil
+  factory :asset do
+    investor_id 1
+client_id 1
+state "MyString"
 name "MyString"
-description "MyText"
-size 1
-land_size 1
-price 1.5
-price_psf 1.5
-hide_price false
-cap_rate 1.5
-occupancy 1.5
-highlights "MyText"
-year_built "MyString"
+price 1
+asset_listing_id 1
+type ""
+started_at "2015-08-11 19:31:36"
+finished_at "2015-08-11 19:31:36"
   end
 
 end

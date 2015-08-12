@@ -1,0 +1,33 @@
+- unless @assets_as_client.empty?
+  h3
+    | Properties as Client
+  - @assets_as_client.each do |asset|
+    p
+      strong
+        = link_to asset.name, edit_asset_path(asset)
+        |&nbsp;-&nbsp;
+        = asset.investor.user.full_name
+        |&nbsp;-&nbsp;
+      = asset.state.humanize
+
+- unless @asset_listings_as_client.empty?
+  h3
+    | Property Listings as Client
+  - @asset_listings_as_client.each do |asset_listing|
+    p
+      = link_to "#{asset_listing.title}#{asset_listing.ended ? ' (ended)' : ''}", edit_asset_listing_path(asset_listing)
+
+- unless @assets_as_investor.empty?
+  h3
+    | Properties as Investor
+  - @assets_as_investor.each do |asset|
+    p
+      strong
+        = link_to asset.name, edit_asset_path(asset)
+        |&nbsp;-&nbsp;
+        = asset.client.user.full_name
+        |&nbsp;-&nbsp;
+      = asset.state.humanize
+
+- if @assets_as_client.empty? && @asset_listings_as_client.empty? && @assets_as_investor.empty?
+  | You currently have no assets set up.

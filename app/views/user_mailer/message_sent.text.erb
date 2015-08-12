@@ -1,0 +1,9 @@
+Dear <%= @user.full_name %>,
+
+<%= @other_user.full_name %> has sent you a message<%= @asset_started ? ' and offered you a contract' : '' %>:
+
+<%= @message.content %>
+
+To reply to <%= @other_user.full_name %>, visit https://www.codedoor.com/assets/<%= @asset.id %>/edit
+
+-The CodeDoor Team

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811170412) do
+ActiveRecord::Schema.define(version: 20150812015812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,33 @@ ActiveRecord::Schema.define(version: 20150811170412) do
 
   add_index "asset_listings", ["client_id"], name: "index_asset_listings_on_client_id", using: :btree
 
+  create_table "asset_messages", force: true do |t|
+    t.integer  "asset_id"
+    t.boolean  "sender_is_client"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "asset_messages", ["asset_id"], name: "index_asset_messages_on_asset_id", using: :btree
+
+  create_table "assets", force: true do |t|
+    t.integer  "investor_id"
+    t.integer  "client_id"
+    t.string   "state"
+    t.string   "name"
+    t.integer  "price"
+    t.integer  "asset_listing_id"
+    t.string   "type"
+    t.datetime "started_at"
+    t.datetime "finished_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "assets", ["client_id"], name: "index_assets_on_client_id", using: :btree
+  add_index "assets", ["investor_id"], name: "index_assets_on_investor_id", using: :btree
+
   create_table "clients", force: true do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -129,8 +156,11 @@ ActiveRecord::Schema.define(version: 20150811170412) do
     t.integer  "asset_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
   end
 
+  add_index "locations", ["addressable_type", "addressable_id"], name: "index_locations_on_addressable_type_and_addressable_id", unique: true, using: :btree
   add_index "locations", ["asset_id"], name: "index_locations_on_asset_id", using: :btree
   add_index "locations", ["company_id"], name: "index_locations_on_company_id", using: :btree
   add_index "locations", ["user_id"], name: "index_locations_on_user_id", using: :btree

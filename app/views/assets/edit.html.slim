@@ -1,0 +1,24 @@
+= form_for [@asset], url: {action: :create_message}, html: {class: 'form-horizontal'}, method: :post do |f|
+  .span8
+    .offset1.span6
+      - @asset.asset_messages.each do |message|
+        - if message.valid?
+          p
+            .pull-right
+              = message.created_at_text
+            strong
+              = message.sender_name
+            br
+            = simple_format(message.content)
+    .offset1.span6
+      p
+        = text_area_tag 'asset_message[content]', @asset_message.present? ? @asset_message.content : '', class: 'span6 longer-text'
+    .offset1.span6
+      - if @asset.has_not_started?
+        .pull-right
+          = f.submit 'Send and Offer Contract', class: 'btn btn-success', name: 'offer-contract', data: {disable_with: 'Submitting...'}
+      p
+        = f.submit 'Send Message', class: 'btn', data: {disable_with: 'Submitting...'}
+
+  = render partial: 'assets/asset_info'
+
