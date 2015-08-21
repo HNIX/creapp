@@ -57,7 +57,12 @@ gem 'ruby-graphviz', :require => 'graphviz'
 gem 'will_paginate', '~> 3.0.6'
 gem 'nested_form'
 gem 'rails_autolink'
-
+gem 'cancancan', '~> 1.10'
+gem 'compass-rails'
+gem 'jquery-turbolinks'
+gem 'carrierwave',             '0.10.0'
+gem 'mini_magick',             '3.8.0'
+gem 'fog',                     '1.23.0'
 
 group :development do
   gem 'better_errors'

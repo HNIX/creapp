@@ -5,6 +5,8 @@
   h3
     = @asset_listing.title
   p
+    = @asset_listing.visibility
+  p
     = auto_link(simple_format(@asset_listing.description), html: { target: "_blank" })
   p
     ' Asking Price:

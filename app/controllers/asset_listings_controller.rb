@@ -1,15 +1,15 @@
 class AssetListingsController < ApplicationController
   before_filter :client_required, only: [:new, :create, :edit, :update]
 
-  #load_and_authorize_resource
+  load_and_authorize_resource
 
   def index
     if user_signed_in?
       @asset_listings = AssetListing.where(visibility: [:public, :creconsole])
     else
-      @asset_listings = AssetListing
+      @asset_listings = AssetListing.where(visibility: :public)
     end
-    @asset_listings = @asset_listings.where('ended = false OR ended IS NULL')
+    @asset_listings = @asset_listings.where(ended: [:false, nil])
   end
 
   def show

@@ -6,7 +6,7 @@ class AssetsController < InheritedResources::Base
 
   before_filter :required_account_is_conditional, only: [:offer, :cancel, :start, :decline]
 
-  #load_and_authorize_resource except: [:create, :create_message, :offer, :start, :cancel, :decline, :finish, :new_application, :create_application]
+  load_and_authorize_resource except: [:create, :create_message, :offer, :start, :cancel, :decline, :finish, :new_application, :create_application]
 
   def index
     if current_user.client.present?
@@ -40,7 +40,7 @@ class AssetsController < InheritedResources::Base
     #@asset.availability = @investor.availability
     @asset.asset_messages.first.sender_is_client = true if @asset.asset_messages.present?
 
-    #authorize! :create, @asset
+    authorize! :create, @asset
     create_asset_or_message(offer_asset_with_message(@asset), @asset.asset_messages.first, :new)
   end
 
@@ -51,7 +51,7 @@ class AssetsController < InheritedResources::Base
 
     redirect_to_existing_asset(@investor, @asset_listing.client)
 
-    #authorize! :read, @asset_listing
+    authorize! :read, @asset_listing
 
     # NOTE: Only use AssetFromApplication for additional validation rules on create
     @asset = Asset.new(client_id: @asset_listing.client_id, investor_id: @investor.id, asset_listing_id: @asset_listing.id)
@@ -70,7 +70,7 @@ class AssetsController < InheritedResources::Base
     @asset.name = @asset_listing.title
     #@asset.availability = @investor.unavailable? ? 'part-time' : @investor.availability
 
-    #authorize! :create, @asset
+    authorize! :create, @asset
     create_asset_or_message(offer_asset_with_message(@asset), @asset.asset_messages.first, :new_application)
   end
 
@@ -81,7 +81,7 @@ class AssetsController < InheritedResources::Base
 
   def create_message
     @asset = Asset.find(params[:id])
-    #authorize! :update, @asset
+    authorize! :update, @asset
     @investor = @asset.investor
     @asset_message = AssetMessage.new(create_message_params)
     @asset_message.sender_is_client = @asset.is_client?(current_user)
@@ -149,7 +149,7 @@ class AssetsController < InheritedResources::Base
   def state_change(permission_required_hash, state_required, action, action_name, success_message, failure_message)
     @asset = Asset.find(params[:id])
     permission_required = @asset.kind_of?(AssetFromApplication) ? permission_required_hash[:application] : permission_required_hash[:direct_contact]
-    #authorize! permission_required, @asset
+    authorize! permission_required, @asset
     if state_required.call
       action.call
       UserMailer.state_occurred_to_asset(@asset.other_user(current_user), @asset, current_user, action_name).deliver

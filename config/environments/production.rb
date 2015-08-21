@@ -57,7 +57,7 @@ Rails.application.configure do
   # config.action_controller.asset_host = "http://asset_listings.example.com"
 
   # Precompile additional asset_listings.
-  # application.js, application.css, and all non-JS/CSS in app/asset_listings folder are already added.
+  # application.js, application.css.scss, and all non-JS/CSS in app/asset_listings folder are already added.
   # config.asset_listings.precompile += %w( search.js )
 
   # Ignore bad email addresses and do not raise email delivery errors.

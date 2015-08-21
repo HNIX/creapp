@@ -8,6 +8,30 @@
       /= render partial: 'shared/rate_badge', locals: {investor: @investor}
     p
       = @investor.title
+
+.container-fluid.main-content
+  .page-title
+    h1
+      | Gallery
+  /! Gallery with captions
+  .row
+    .col-lg-12
+      .widget-container.fluid-height
+        .heading
+          i.fa.fa-picture-o
+          | Captions
+        .widget-content.padded
+          ul.gallery-grid.clearfix
+            li
+              figure
+                = image_tag current_user.picture.url if current_user.picture?
+                .caption
+                  h3
+                    | Leaf
+                  span by Cuba Gallery    span.content
+            end
+
+
     /p
     /  = @investor.user.location_text
     /p

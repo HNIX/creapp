@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   has_one :investor, dependent: :destroy
   has_one :client, dependent: :destroy
   has_one :location, dependent: :destroy
-
+  mount_uploader :picture, PictureUploader
   validates :first_name, presence: true
   validates :last_name, presence: true
   #validates :country, presence: true, if: :checked_terms?

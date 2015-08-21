@@ -28,8 +28,6 @@ class AssetListing < ActiveRecord::Base
   belongs_to :client
   has_one :location, dependent: :destroy
   has_many :tenants, dependent: :destroy
-  #has_many :asset_messages, dependent: :destroy
-  #accepts_nested_attributes_for :asset_messages
 
   validates :client_id, presence: true
   validates :name, presence: true

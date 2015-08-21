@@ -1,35 +1,72 @@
-div class="navbar"
-  div class="navbar-inner"
-    strong
-      a class="pull-left" href="#{root_path}"
+- if user_signed_in?
+  .navbar.navbar-fixed-top.scroll-hide
+    .container-fluid.top-bar
+      .pull-right
+        ul.nav.navbar-nav.pull-right
+          li.dropdown.user.hidden-xs
+            a class="dropdown-toggle" href="#" data-toggle="dropdown"
+              img width="34" height="34" src='assets/avatar-male.jpg'
+              = current_user.full_name
+            ul class="dropdown-menu"
+              li
+                a href="#{edit_user_path(current_user)}"
+                  i class="fa fa-user"
+                  | Settings
+              li
+                - if current_user.completed_investor_account?
+                  a href="#{investor_path(current_user.investor)}"
+                    | Profile
+              li
+                a href="#{destroy_user_session_path}" data-method="delete"
+                  | Log out
+      button.navbar-toggle
+        span.fa.fa-bar
+        span.fa.fa-bar
+        span.fa.fa-bar
+        a.logo href="#{root_path}"
         | CREConsole
-    - if user_signed_in?
-      a class="pull-right" href="#{destroy_user_session_path}" data-method="delete"
-        | Log out
-      - if current_user.completed_investor_account?
-        a class="pull-left" href="#{investor_path(current_user.investor)}"
-          | Profile
-      - if current_user.client.present?
-        a class="pull-left" href="#{investors_path}"
-          | Search
-      - if current_user.completed_investor_account? || current_user.client.present?
-        a class="pull-left" href="#{assets_path}"
-          | Assets
-        /Only show if if user is client and not investor
-      - unless current_user.client.present? && !current_user.completed_investor_account?
-        a class="pull-left" href="#{asset_listings_path}"
-          | Find Properties
-      - if current_user.client.present?
-        a class="pull-left" href="#{new_asset_listing_path}"
-          | Create Property Listing
-      a class="pull-right" href="#{edit_user_path(current_user)}"
-        | Settings
-    - else
-      a class="pull-left" href="#{asset_listings_path}"
-        | Find Properties
-      /a class="btn-auth btn-github pull-right" href="#{user_omniauth_authorize_path(:github)}"
-      /  | Log in with GitHub
-      a class="pull-right" href="#{new_user_session_path}"
-        | Log in
-      a class="pull-right" href="#{new_user_registration_path}"
-        | Sign up
+    div class="container-fluid main-nav clearfix"
+      div class="nav-collapse"
+        ul class="nav"
+          - if user_signed_in?
+            li
+              a href="#{root_path}"
+                span aria-hidden="true" class="se7en-home"
+                | Dashboard
+            li
+              - if current_user.completed_investor_account?
+                a href="#{investor_path(current_user.investor)}"
+                  span aria-hidden="true" class="se7en-icon"
+                  | Profile
+            - if current_user.completed_investor_account? || current_user.client.present?
+              li
+                a href="#{assets_path}"
+                  span aria-hidden="true" class="se7en-icon"
+                  | Assets
+            - unless current_user.client.present? && !current_user.completed_investor_account?
+              li
+                a href="#{asset_listings_path}"
+                  span aria-hidden="true" class="se7en-icon"
+                  | Find Properties
+            - if current_user.client.present?
+              li
+                a href="#{new_asset_listing_path}"
+                  span aria-hidden="true" class="se7en-icon"
+                  | Create Property Listing
+- else
+  .navbar.navbar-fixed-top
+    .container-fluid.top-bar
+      .pull-right
+        ul.nav.navbar-nav.pull-right
+          li
+            a class="pull-right" href="#{new_user_session_path}"
+              | Log in
+          li
+            a class="pull-right" href="#{new_user_registration_path}"
+              | Sign up
+      button.navbar-toggle
+        span.fa.fa-bar
+        span.fa.fa-bar
+        span.fa.fa-bar
+        a.logo href="#{root_path}"
+        | CREConsole

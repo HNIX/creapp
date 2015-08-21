@@ -37,124 +37,6 @@
           = f.text_field :price_to, placeholder: 'Price from'
           = render partial: 'shared/help_inline', locals: {model: @investor, attribute: :price_to}
 
-      /.control-group class="#{model_attribute_class(@programmer, :availability)}"
-      /  .control-label
-      /    = f.label :availability
-      /  .controls
-      /    = render partial: 'shared/help_block', locals: {model: @programmer, attribute: :availability}
-      /    label class='radio'
-      /      = f.radio_button :availability, :'full-time'
-      /      | Full-time
-      /    label class='radio'
-      /      = f.radio_button :availability, :'part-time'
-      /      | Part-time
-      /    label class='radio'
-      /      = f.radio_button :availability, :unavailable
-      /      | Unavailable
-
-      /.control-group class="#{model_attribute_class(current_user, :contract_to_hire)}"
-      /  .control-label
-      /  .controls
-      /    = render partial: 'shared/help_block', locals: {model: @programmer, attribute: :contract_to_hire}
-      /    label class='checkbox'
-      /      = f.check_box :contract_to_hire
-      /      | I will consider contract to hire positions.
-
-      /.control-group class="#{model_attribute_class(@programmer, :skills)}"
-      /  .control-label
-      /    | Skills
-      /  .controls
-      /    = render partial: 'shared/help_block', locals: {model: @programmer, attribute: :skills}
-      /    = hidden_field_tag 'programmer[skill_ids][]', ''
-      /    - Skill.all.each do |skill|
-      /      .span2.skill-checkbox
-      /        label class='checkbox'
-      /          = check_box_tag 'programmer[skill_ids][]', skill.id, @programmer.skills.include?(skill)
-      /          = skill.name
-      /.control-group class="#{model_attribute_class(@programmer, :hourly_rate)}"
-      /  .control-label
-      /    = f.label :hourly_rate, 'Rate (USD)'
-      /  .controls
-      /    = render partial: 'shared/help_block', locals: {model: @programmer, attribute: :hourly_rate}
-      /    .row#full-time-explanation
-      /      p.span5
-      /        | As a full-time programmer, billing is generally done a daily basis.  The hourly rate is used when you spend an hour or two with a client.
-      /    .row
-      /      .span5
-      /        .row
-      /          .span2
-      /            strong
-      /              | Paid to You:
-      /    .row
-      /      .span5
-      /        .row
-      /          .span2
-      /            | $
-      /            = f.text_field(:hourly_rate, class: 'rate-field', id: 'hourly_rate_to_programmer')
-      /            | /hour
-      /          .span2
-      /            strong
-      /              span#daily_rate_to_programmer
-      /                | $
-      /                span#daily_rate_to_programmer_value
-      /                  = @programmer.daily_rate_to_programmer
-      /                | /day
-      /    .row
-      /      .span5
-      /        | Plus CodeDoor Fee:
-      /    .row
-      /      .span5
-      /        .row
-      /          .span2
-      /            span#hourly_fee_to_codedoor
-      /              | $
-      /              span#hourly_fee_to_codedoor_value
-      /                = number_with_precision(@programmer.hourly_fee_to_codedoor, precision: 2)
-      /              | /hour
-      /          .span2
-      /            span#daily_fee_to_codedoor
-      /              | $
-      /              span#daily_fee_to_codedoor_value
-      /                = @programmer.daily_fee_to_codedoor
-      /              | /day
-      /    .row
-      /      .span5
-      /        | Charged to Client:
-      /    .row
-      /      .span5
-      /        .row
-      /          .span2
-      /            span#hourly_rate_to_client
-      /              | $
-      /              span#hourly_rate_to_client_value
-      /                = number_with_precision(@programmer.hourly_rate_to_client, precision: 2)
-      /              | /hour
-      /          .span2
-      /            span#daily_rate_to_client
-      /              | $
-      /              span#daily_rate_to_client_value
-      /                = @programmer.daily_rate_to_client
-      /              | /day
-
-      /.control-group class="#{model_attribute_class(@programmer, :onsite_status)}"
-      /  .control-label
-      /    = f.label :onsite_status
-      /
-      /  .controls
-      /    = render partial: 'shared/help_block', locals: {model: @programmer, attribute: :onsite_status}
-      /    label class='radio'
-      /      = f.radio_button :onsite_status, :onsite
-      /      = Programmer.onsite_status_description(:onsite)
-      /    label class='radio'
-      /      = f.radio_button :onsite_status, :occasional
-      /      = Programmer.onsite_status_description(:occasional)
-      /    label class='radio'
-      /      = f.radio_button :onsite_status, :visits_allowed
-      /      = Programmer.onsite_status_description(:visits_allowed)
-      /    label class='radio'
-      /      = f.radio_button :onsite_status, :offsite
-      /      = Programmer.onsite_status_description(:offsite)
-
       .control-group class="#{model_attribute_class(@investor, :visibility)}"
         .control-label
           = f.label :visibility
@@ -171,165 +53,78 @@
             = f.radio_button :visibility, :private
             | Private (Visible to only myself)
 
-      /h2.span9
-      /  | Portfolio
-      /
-      /- if @programmer.qualified?
-      /  .alert.alert-notice.settings-alert
-      /    p
-      /      | You have contributed to popular open-source repositories.
-      /- else
-      /  .alert.alert-error.settings-alert
-      /    p
-      /      | Contractors on CodeDoor need at least one open-source contribution to a public repository with at least 25 stars.  Add your contributions to repositories below.
-      /    p
-      /      ' If you've contributed to a major open-source project that isn't on GitHub, please send an email to:
-      /      a href="mailto:rcheng@codedoor.com"
-      /        | rcheng@codedoor.com
-
-      /h4.span9.settings-header
-      /  | Repositories
-      /
-      /.control-group.show-row
-      /  .offset1.show-label
-      /    | Show
-      /
-      /span#github-repos
-      /  / TODO: A hack is used instead of using the actual form,
-      /  / since we need to render the github repo partial server-side (for AJAX).
-      /  - index = 0
-      /  = f.fields_for :github_repos do |github_form|
-      /    - repo = github_form.object
-      /    = render partial: 'programmers/edit_github_repo', locals: {repo: repo, index: index, programmer: @programmer, serverside: false}
-      /    - index += 1
-      /
-      /.control-group
-      /  .control-label
-      /  .controls
-      /    .row
-      /      .span1
-      /      p
-      /        strong
-      /          | Add Your Contributions In Other People's Repositories
-      /    .row
-      /      .span1
-      /      = text_field_tag :repo_owner, nil, placeholder: 'User', class: 'repo-owner-field', id: 'repo-owner'
-      /      | /
-      /      = text_field_tag :repo_name, nil, placeholder: 'Repository', class: 'repo-name-field', id: 'repo-name'
-      /      = link_to 'Add', verify_contribution_user_programmer_path(@programmer), method: :post, remote: true, id: 'verify-contribution', class: 'btn'
-      /      span.ajax-load.hidden
-      /        = image_tag('ajax-load.gif')
-      /      = javascript_include_tag 'settings/verify_contribution'
-      /    .row
-      /      .span1
-      /      div id='contribution-message' class='verify-contribution-message'
-      /
-      /.control-group
-      /  .control-label
-      /    | Ohloh account
-      /  .controls
-      /    = f.text_field :ohloh_username, placeholder: 'username for ohloh.com'
-      /    = render partial: 'shared/help_inline', locals: {model: @programmer, attribute: :ohloh_username}
-      /
-      /h4.span9.settings-header
-      /  | Projects
-      /
-      /= f.fields_for :portfolio_items do |portfolio_form|
-      /  .control-group class="#{model_attribute_class(portfolio_form.object, :title)}"
-      /    .control-label
-      /      | Title
-      /    .controls
-      /      = portfolio_form.text_field :title
-      /      = render partial: 'shared/help_inline', locals: {model: portfolio_form.object, attribute: :title}
-      /  .control-group class="#{model_attribute_class(portfolio_form.object, :url)}"
-      /    .control-label
-      /      | Link
-      /    .controls
-      /      = portfolio_form.text_field :url
-      /      = render partial: 'shared/help_inline', locals: {model: portfolio_form.object, attribute: :url}
-      /  .control-group class="#{model_attribute_class(portfolio_form.object, :description)}"
-      /    .control-label
-      /      | Description
-      /    .controls
-      /      = render partial: 'shared/help_block', locals: {model: portfolio_form.object, attribute: :description}
-      /      = portfolio_form.text_area :description, class: 'span6'
-      /
-      /  = portfolio_form.link_to_remove 'Remove project'
-      /
-      /- if @programmer.portfolio_items.empty?
-      /  .alert.alert-notice.settings-alert
-      /    p
-      /      | Please add any projects you have created.
-      /
-      /= f.link_to_add 'Add project', :portfolio_items
-      /
-      /h2.span9.settings-header
-      /  | Résumé
-      /
-      /= f.fields_for :resume_items do |resume_form|
-      /  .control-group class="#{model_attribute_class(resume_form.object, :company_name)}"
-      /    .control-label
-      /      | Company
-      /    .controls
-      /      = resume_form.text_field :company_name
-      /      = render partial: 'shared/help_inline', locals: {model: resume_form.object, attribute: :company_name}
-      /  .control-group class="#{model_attribute_class(resume_form.object, :title)}"
-      /    .control-label
-      /      | Title
-      /    .controls
-      /      = resume_form.text_field :title
-      /      = render partial: 'shared/help_inline', locals: {model: resume_form.object, attribute: :title}
-      /  .control-group class="#{model_attribute_class(resume_form.object, :description)}"
-      /    .control-label
-      /      | Description
-      /    .controls
-      /      = render partial: 'shared/help_block', locals: {model: resume_form.object, attribute: :description}
-      /      = resume_form.text_area :description, class: 'span6'
-      /  = render partial: 'programmers/date', locals: {form: resume_form, type: :resume}
-      /
-      /  = resume_form.link_to_remove 'Remove from résumé'
-      /
-      /- if @programmer.resume_items.empty?
-      /  .alert.alert-notice.settings-alert
-      /    p
-      /      | Please enter your work history.
-      /
-      /= f.link_to_add 'Add to résumé', :resume_items
-      /
-      /h2.span9.settings-header
-      /  | Education
-      /
-      /= f.fields_for :education_items do |edu_form|
-      /  .control-group
-      /    .control-label
-      /      | School Name
-      /    .controls
-      /      = edu_form.text_field :school_name
-      /      = render partial: 'shared/help_inline', locals: {model: edu_form.object, attribute: :company_name}
-      /  .control-group
-      /    .control-label
-      /      | Degree and Major
-      /    .controls
-      /      = edu_form.text_field :degree_and_major
-      /      = render partial: 'shared/help_inline', locals: {model: edu_form.object, attribute: :degree_and_major}
-      /  .control-group
-      /    .control-label
-      /      | Description
-      /    .controls
-      /      = render partial: 'shared/help_block', locals: {model: edu_form.object, attribute: :description}
-      /      = edu_form.text_area :description, class: 'span6'
-      /  = render partial: 'programmers/date', locals: {form: edu_form, type: :education}
-      /
-      /  = edu_form.link_to_remove 'Remove from education'
-      /
-      /- if @programmer.education_items.empty?
-      /  .alert.alert-notice.settings-alert
-      /    p
-      /      | Please enter your educational history.
-      /
-      /= f.link_to_add 'Add to education', :education_items
-
       .control-group
         .controls
           = f.submit 'Save', class: 'btn', data: {disable_with: 'Submitting...'}
   /= javascript_include_tag 'settings/rates'
+
+div class="page-title"
+  h1
+    | Investor Info
+div class="row"
+  div class="col-lg-12"
+    div class="widget-container fluid-height"
+      div class="heading"
+        i class="fa fa-edit"
+        | Form Wizard
+      div class="widget-content"
+        div class="wizard" id="wizard"
+          div class="padded"
+            ul class="wizard-nav nav nav-pills"
+              li
+                a data-toggle="tab" href="#tab1"
+                  | 1
+              li
+                a data-toggle="tab" href="#tab2"
+                  | 2
+              li
+                a data-toggle="tab" href="#tab3"
+                  | 3
+            div class="progress progress-striped active"
+              div aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="progress-bar" role="progressbar"
+            div class="tab-content"
+              div class="tab-pane" id="tab1"
+                h2
+                  | Login Credentials
+                = nested_form_for [current_user, @investor], url: {action: :update}, html: {class: 'form-horizontal'} do |f|
+                  = f.hidden_field :user_id
+                  div class="form-group"
+                    = f.label :title
+                    = f.text_field :title, placeholder: 'Title', class: "form-control"
+              div class="tab-pane" id="tab2"
+                h2
+                  | Personal Information
+                = nested_form_for [current_user, @investor], url: {action: :update}, html: {class: 'form-horizontal'} do |f|
+                  = f.hidden_field :user_id
+                  div class="form-group"
+                    = f.label :title
+                    = f.text_field :title, placeholder: 'Title', class: "form-control"
+              div class="tab-pane" id="tab3"
+                h2
+                  | Payment Information
+                = nested_form_for [current_user, @investor], url: {action: :update}, html: {class: 'form-horizontal'} do |f|
+                  = f.hidden_field :user_id
+                    div class="form-group"
+                      = f.label :title
+                      = f.text_field :title, placeholder: 'Title', class: "form-control"
+
+          div class="pager"
+            div class="btn btn-default-outline btn-previous"
+              i class="fa fa-long-arrow-left"
+                | Back
+            div class="btn btn-primary-outline btn-next"
+              | Continue
+              i class="fa fa-long-arrow-right"
+br
+br
+br
+br
+br
+br
+br
+br
+br
+br
+br
+br
+br

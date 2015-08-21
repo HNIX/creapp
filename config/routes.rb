@@ -52,7 +52,6 @@ Rails.application.routes.draw do
   get '/sitemap.xml.gz', to: 'sitemaps#show'
   get '/login', to: 'login#main'
 
-  get 'landings/index'
 
   resources :companies
   resources :locations

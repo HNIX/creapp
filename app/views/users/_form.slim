@@ -1,45 +1,42 @@
-.control-group class="#{model_attribute_class(user, :first_name)}"
-  .control-label
-    = f.label :first_name
-  .controls
-    = f.text_field :first_name, placeholder: 'First Name'
-    = render partial: 'shared/help_inline', locals: {model: user, attribute: :first_name}
-.control-group class="#{model_attribute_class(user, :last_name)}"
-  .control-label
-    = f.label :last_name
-  .controls
-    = f.text_field :last_name, placeholder: 'Last Name'
-    = render partial: 'shared/help_inline', locals: {model: user, attribute: :last_name}
-.control-group class="#{model_attribute_class(user, :email)}"
-  .control-label
-    = f.label :email
-  .controls
-    = f.text_field :email, placeholder: 'Email'
-    = render partial: 'shared/help_inline', locals: {model: user, attribute: :email}
-
-
+.form-group
+  = f.text_field :first_name, placeholder: 'First Name', class: "form-control"
+.form-group
+  = f.text_field :last_name, placeholder: 'Last Name', class: "form-control"
+.form-group
+  = f.text_field :email, placeholder: 'Email', class: "form-control"
 = render partial: 'users/password_form', locals: {f: f, user: user}
-
+br
 - unless user.checked_terms_was
-  .control-group class="#{model_attribute_class(user, :checked_terms)}"
-    .controls
-      = render partial: 'shared/help_inline', locals: {model: user, attribute: :checked_terms}
-      label class='checkbox'
-        = f.check_box :checked_terms
+  .form-group
+    label class="checkbox"
+      = f.check_box :checked_terms
+      span
         ' By checking this box, I agree to abide by CREConsole's
         a href="/terms" target="_blank"
           | Terms of Use
         span
         | .
-- if !user.investor.present? && !user.client.present?
-  .row
-    .span3
-      = f.submit 'Create Investor Account', class: 'btn', data: {disable_with: 'Submitting...'}, name: :create_investor
-  .row
-    .span3
-      = f.submit 'Create Client Account', class: 'btn', data: {disable_with: 'Submitting...'}, name: :create_client
-- else
-  .control-group
-    .controls
-      = f.submit 'Save', class: 'btn', data: {disable_with: 'Submitting...'}
-/= javascript_include_tag 'settings/user_country'
+
+.form-group
+ label.control-label.col-md-2 With Preview
+ .col-md-4
+   .fileupload.fileupload-new data-provides="fileupload"
+     .fileupload-new.img-thumbnail style=("width: 200px; height: 150px;")
+       img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" /
+     .fileupload-preview.fileupload-exists.img-thumbnail style=("width: 200px; max-height: 150px")
+     div
+       span.btn.btn-default.btn-file
+         span.fileupload-new Select image
+         span.fileupload-exists Change
+         = f.file_field :picture
+       a.btn.btn-default.fileupload-exists data-dismiss="fileupload" href="#"  Remove
+
+/- if !user.investor.present? && !user.client.present?
+/  .row
+/    .span1
+/    .span3
+/      = f.submit 'Create Investor Account', class: 'btn', data: {disable_with: 'Submitting...'}, name: :create_investor
+/    .span3
+/      = f.submit 'Create Client Account', class: 'btn', data: {disable_with: 'Submitting...'}, name: :create_client
+/- else
+

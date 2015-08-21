@@ -1,8 +1,13 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
+  layout :layout_by_resource
   include RequireAccountRedirect
   protect_from_forgery with: :exception
+
+  check_authorization
+  skip_authorization_check
+
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
@@ -10,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def main
-    @custom_description = 'CodeDoor is a marketplace for freelance programmers that have contributed to open source software.'
+    @custom_description = 'CREConsole is a marketplace for commercial real estate.'
     render('/landings/loggedout') unless current_user.present?
   end
 
@@ -25,11 +30,18 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def layout_by_resource
+    if devise_controller?
+      "sign_up"
+    else
+      "application"
+    end
+  end
   
   #-> Prelang (user_login:devise)
   def require_user_signed_in
     unless user_signed_in?
-
       # If the user came from a page, we can send them back.  Otherwise, send
       # them to the root path.
       if request.env['HTTP_REFERER']
