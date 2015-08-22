@@ -10,14 +10,16 @@
             ul class="dropdown-menu"
               li
                 a href="#{edit_user_path(current_user)}"
-                  i class="fa fa-user"
+                  i class="fa fa-cogs"
                   | Settings
               li
                 - if current_user.completed_investor_account?
                   a href="#{investor_path(current_user.investor)}"
+                    i class="fa fa-user"
                     | Profile
               li
                 a href="#{destroy_user_session_path}" data-method="delete"
+                  i class="fa fa-sign-out"
                   | Log out
       button.navbar-toggle
         span.fa.fa-bar
@@ -31,28 +33,28 @@
           - if user_signed_in?
             li
               a href="#{root_path}"
-                span aria-hidden="true" class="se7en-home"
+                span aria-hidden="true" class="fa fa-home"
                 | Dashboard
             li
               - if current_user.completed_investor_account?
                 a href="#{investor_path(current_user.investor)}"
-                  span aria-hidden="true" class="se7en-icon"
+                  span aria-hidden="true" class="fa fa-user"
                   | Profile
             - if current_user.completed_investor_account? || current_user.client.present?
               li
                 a href="#{assets_path}"
-                  span aria-hidden="true" class="se7en-icon"
+                  span aria-hidden="true" class="fa fa-building-o"
                   | Assets
             - unless current_user.client.present? && !current_user.completed_investor_account?
               li
                 a href="#{asset_listings_path}"
-                  span aria-hidden="true" class="se7en-icon"
+                  span aria-hidden="true" class="fa fa-search"
                   | Find Properties
             - if current_user.client.present?
               li
                 a href="#{new_asset_listing_path}"
-                  span aria-hidden="true" class="se7en-icon"
-                  | Create Property Listing
+                  span aria-hidden="true" class="fa fa-plus-square-o"
+                  | New Listing
 - else
   .navbar.navbar-fixed-top
     .container-fluid.top-bar
@@ -60,7 +62,8 @@
         ul.nav.navbar-nav.pull-right
           li
             a class="pull-right" href="#{new_user_session_path}"
-              | Log in
+              i class="fa fa-sign-in"
+              |  Log in
           li
             a class="pull-right" href="#{new_user_registration_path}"
               | Sign up

@@ -9,16 +9,17 @@ html
       title
         = "Investors | #{title} | CREConsole"
     = favicon_link_tag 'favicon.ico'
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-    meta name="keywords" content="open source bounty, open source, programming career, software asset, programming asset, freelance programming, software career, open source asset"
-    - if @custom_description
-      meta name="description" content="#{@custom_description}"
     = analytics_init if Rails.env.production?
-  body class="page-header-fixed bg-1"
-    div class="modal-shiftfix"
+    link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700" media="all" rel="stylesheet" type="text/css" /
+    script src="http://code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"
+    script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"
+    meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" /
+  body.page-header-fixed.bg-1
+    .modal-shiftfix
       = render partial: 'shared/navbar'
-      div class="container-fluid main-content"
+      .container-fluid.main-content
         = render partial: 'shared/flash_messages'
         = yield

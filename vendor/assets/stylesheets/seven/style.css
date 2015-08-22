@@ -31,13 +31,13 @@ body {
   body.bg-1 {
     background: #e8e8e8; }
   body.bg-2 {
-    background: url(../images/bg-2.png) repeat 0 0; }
+    background: image-url('bg-2.png') repeat 0 0; }
   body.bg-3 {
-    background: url(../images/bg-3.png) repeat 0 0; }
+    background: image-url('bg-3.png') repeat 0 0; }
   body.bg-4 {
-    background: url(../images/bg-4.png) repeat 0 0; }
+    background: image-url('bg-4.png') repeat 0 0; }
   body.bg-5 {
-    background: url(../images/bg-5.png) repeat 0 0; }
+    background: image-url('bg-5.png') repeat 0 0; }
 
 .main-content {
   padding-bottom: 20px; }
@@ -136,7 +136,7 @@ dl {
 /*----------------------------------------------------------------------------------- */
 body.login1 {
   padding: 0;
-  background: url(../images/login-blurry-bg.jpg) no-repeat center center;
+  background: image-url('login-blurry-bg.jpg') no-repeat center center;
   background-size: cover;
   position: relative; }
   body.login1.signup .login-container {
@@ -315,7 +315,7 @@ body.login2 {
         display: block;
         margin-bottom: 4px; }
     .navbar .container-fluid.top-bar .logo {
-      /*background: url(se7en-logo.png) no-repeat 0 0;*/
+      background: image-url("se7en-logo.png") no-repeat 0 0;
       width: 54px;
       height: 16px;
       float: left;
@@ -323,7 +323,7 @@ body.login2 {
       margin: 14px 10px 0 0; }
       @media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6 / 2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
         .navbar .container-fluid.top-bar .logo {
-          background-image: url("../images/se7en-logo@2x.png");
+          background-image: image-url("se7en-logo@2x.png");
           background-size: 54px 16px; } }
     .navbar .container-fluid.top-bar form {
       margin-top: 6px; }
@@ -331,13 +331,13 @@ body.login2 {
         height: 30px;
         border-color: #e6e6e6;
         box-shadow: none;
-        background: white url("../images/icon-search.png") no-repeat center left;
+        background: white image-url("icon-search.png") no-repeat center left;
         padding-left: 24px;
         margin-top: 1px;
         width: 200px; }
         @media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6 / 2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
           .navbar .container-fluid.top-bar form .form-control {
-            background-image: url("../images/fasearch@2x.png");
+            background-image: image-url("fasearch@2x.png");
             background-size: 18px 12px; } }
         .navbar .container-fluid.top-bar form .form-control:focus {
           border-color: #007aff; }
@@ -640,13 +640,13 @@ body.sidebar-nav {
     .style-selector .style-selector-container .pattern-options a#bg-1 {
       background: #e8e8e8; }
     .style-selector .style-selector-container .pattern-options a#bg-2 {
-      background: url(../images/bg-2.png) repeat 0 0; }
+      background: image-url('bg-2.png') repeat 0 0; }
     .style-selector .style-selector-container .pattern-options a#bg-3 {
-      background: url(../images/bg-3.png) repeat 0 0; }
+      background: image-url('bg-3.png') repeat 0 0; }
     .style-selector .style-selector-container .pattern-options a#bg-4 {
-      background: url(../images/bg-4.png) repeat 0 0; }
+      background: image-url('bg-4.png') repeat 0 0; }
     .style-selector .style-selector-container .pattern-options a#bg-5 {
-      background: url(../images/bg-5.png) repeat 0 0; }
+      background: image-url('bg-5.png') repeat 0 0; }
     .style-selector .style-selector-container .pattern-options a.active {
       border: 2px solid #007aff; }
 
@@ -1167,7 +1167,7 @@ th:active {
       padding-top: 8px;
       letter-spacing: -0.06em; }
       .stats-container [class^="col-"] .number .icon, .stats-container [class*="col-"] .number .icon {
-        background: url("../images/info-data-sprite.png") no-repeat left top;
+        background: image-url("info-data-sprite.png") no-repeat left top;
         width: 50px;
         height: 38px;
         display: inline-block;
@@ -1175,7 +1175,7 @@ th:active {
         margin: 20px 12px 0 0; }
         @media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6 / 2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
           .stats-container [class^="col-"] .number .icon, .stats-container [class*="col-"] .number .icon {
-            background-image: url("../images/info-data-sprite@2x.png");
+            background-image: image-url("info-data-sprite@2x.png");
             background-size: 200px 190px; } }
         .stats-container [class^="col-"] .number .icon.visitors, .stats-container [class*="col-"] .number .icon.visitors {
           background-position: -50px top; }
@@ -1821,13 +1821,13 @@ th:active {
             position: absolute;
             bottom: 0;
             left: -5px;
-            background: url("../images/chat-left.png") left top no-repeat;
+            background: image-url("chat-left.png") left top no-repeat;
             width: 13px;
             height: 13px;
             display: block; }
             @media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6 / 2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
               .chat .widget-content ul li .bubble:after {
-                background-image: url("../images/chat-left@2x.png");
+                background-image: image-url("chat-left@2x.png");
                 background-size: 13px 13px; } }
           .chat .widget-content ul li .bubble .user-name {
             font-size: 1.1em;
@@ -1850,12 +1850,12 @@ th:active {
           .chat .widget-content ul li.current-user .bubble {
             background: #178efe; }
             .chat .widget-content ul li.current-user .bubble:after {
-              background: url("../images/chat-right.png") left top no-repeat;
+              background: image-url("chat-right.png") left top no-repeat;
               left: auto;
               right: -6px; }
               @media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6 / 2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
                 .chat .widget-content ul li.current-user .bubble:after {
-                  background-image: url("../images/chat-right@2x.png");
+                  background-image: image-url("chat-right@2x.png");
                   background-size: 13px 13px; } }
           .chat .widget-content ul li.current-user p, .chat .widget-content ul li.current-user a {
             color: white !important; }
@@ -2102,11 +2102,11 @@ input[type="text"] {
     border-radius: 3px;
     border: 1px solid #c8c8c8; }
 .opacity input[type="checkbox"]:checked + span:before {
-  background: #007aff url("../images/checkmark.png") no-repeat center center;
+  background: #007aff image-url("checkmark.png") no-repeat center center;
   border-color: #007aff; }
   @media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6 / 2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
     .opacity input[type="checkbox"]:checked + span:before {
-      background-image: url("../images/checkmark@2x.png");
+      background-image: image-url("checkmark@2x.png");
       background-size: 14px 14px; } }
 .opacity input[type="radio"] {
   display: none; }
@@ -3182,7 +3182,7 @@ ul.timeline {
   padding: 100px 0 420px 0;
   text-align: center;
   margin-bottom: 0px;
-  background: url(../images/mark-bg.gif);
+  background: image-url('mark-bg.gif');
   background-size: cover;
   overflow: hidden;
   max-height: 780px; }

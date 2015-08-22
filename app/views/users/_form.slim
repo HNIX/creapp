@@ -18,18 +18,18 @@ br
         | .
 
 .form-group
- label.control-label.col-md-2 With Preview
- .col-md-4
-   .fileupload.fileupload-new data-provides="fileupload"
-     .fileupload-new.img-thumbnail style=("width: 200px; height: 150px;")
-       img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" /
-     .fileupload-preview.fileupload-exists.img-thumbnail style=("width: 200px; max-height: 150px")
-     div
-       span.btn.btn-default.btn-file
-         span.fileupload-new Select image
-         span.fileupload-exists Change
-         = f.file_field :picture
-       a.btn.btn-default.fileupload-exists data-dismiss="fileupload" href="#"  Remove
+  label.control-label.col-md-2 With Preview
+  .col-md-4
+    .fileupload.fileupload-new data-provides="fileupload"
+      .fileupload-new.img-thumbnail style=("width: 200px; height: 150px;")
+        img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" /
+      .fileupload-preview.fileupload-exists.img-thumbnail style=("width: 200px; max-height: 150px")
+      div
+        span.btn.btn-default.btn-file
+          span.fileupload-new Select image
+          span.fileupload-exists Change
+          = f.file_field :picture
+        a.btn.btn-default.fileupload-exists data-dismiss="fileupload" href="#"  Remove
 
 /- if !user.investor.present? && !user.client.present?
 /  .row

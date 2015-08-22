@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  layout :layout_by_resource
   include RequireAccountRedirect
   protect_from_forgery with: :exception
 
@@ -31,13 +30,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def layout_by_resource
-    if devise_controller?
-      "sign_up"
-    else
-      "application"
-    end
-  end
   
   #-> Prelang (user_login:devise)
   def require_user_signed_in
