@@ -22,7 +22,10 @@ br
   .col-md-4
     .fileupload.fileupload-new data-provides="fileupload"
       .fileupload-new.img-thumbnail style=("width: 200px; height: 150px;")
-        img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" /
+        - if current_user.picture?
+          img src='#{current_user.picture_url.to_s}'
+        -else
+          img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" /
       .fileupload-preview.fileupload-exists.img-thumbnail style=("width: 200px; max-height: 150px")
       div
         span.btn.btn-default.btn-file

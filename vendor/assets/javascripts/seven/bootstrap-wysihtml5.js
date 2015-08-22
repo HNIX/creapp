@@ -1,3 +1,5 @@
+
+
 !function($, wysi) {
     "use strict";
 
@@ -509,3 +511,4 @@
     };
 
 }(window.jQuery, window.wysihtml5);
+

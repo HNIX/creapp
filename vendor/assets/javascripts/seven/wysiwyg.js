@@ -15,7 +15,6 @@
  * Might be useful, when you want to pass some other data to your handler
  */
 
-
 (function(jQuery){
 
 	jQuery.hotkeys = {
@@ -311,3 +310,4 @@
 		fileUploadError: function (reason, detail) { console.log("File upload error", reason, detail); }
 	};
 }(window.jQuery));
+
