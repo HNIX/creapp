@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
   def edit
+    @role = params[:industry_role]
   end
 
   def update
@@ -26,6 +27,6 @@ class UsersController < ApplicationController
   def user_params
     params[:user].delete(:password) if params[:user][:password].blank?
     params[:user].delete(:password_confirmation) if params[:user][:password_confirmation].blank?
-    params.require(:user).permit(:picture, :first_name, :last_name, :email, :password, :password_confirmation, :checked_terms)
+    params.require(:user).permit(:industry_role, :picture, :first_name, :last_name, :email, :password, :password_confirmation, :checked_terms)
   end
 end

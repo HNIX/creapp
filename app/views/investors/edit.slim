@@ -8,123 +8,44 @@
   /- elsif !@programmer.qualified?
   /  p
   /  = render partial: 'shared/notice_message', locals: {message: 'Contractors on CodeDoor need at least one open-source contribution to a GitHub repository with at least 25 stars, or another popular repository elsewhere.'}
-.row
-  .span3
-    = render partial: 'elements/sidebar', locals: {active: :investor}
-  .span9
-    h2.span8.settings-header
-      | Investor Info
-    = nested_form_for [current_user, @investor], url: {action: :update}, html: {class: 'form-horizontal'} do |f|
-      = f.hidden_field :user_id
-      .control-group class="#{model_attribute_class(@investor, :title)}"
-        .control-label
-          = f.label :title
-        .controls
-          = f.text_field :title, placeholder: 'Title'
-          = render partial: 'shared/help_inline', locals: {model: @investor, attribute: :title}
-
-      .control-group class="#{model_attribute_class(@investor, :price_from)}"
-        .control-label
-          = f.label :price_from
-        .controls
-          = f.text_field :price_from, placeholder: 'Price from'
-          = render partial: 'shared/help_inline', locals: {model: @investor, attribute: :price_from}
-
-      .control-group class="#{model_attribute_class(@investor, :price_to)}"
-        .control-label
-          = f.label :price_t0
-        .controls
-          = f.text_field :price_to, placeholder: 'Price from'
-          = render partial: 'shared/help_inline', locals: {model: @investor, attribute: :price_to}
-
-      .control-group class="#{model_attribute_class(@investor, :visibility)}"
-        .control-label
-          = f.label :visibility
-
-        .controls
-          = render partial: 'shared/help_block', locals: {model: @investor, attribute: :visibility}
-          label class='radio'
-            = f.radio_button :visibility, :public
-            | Public (Visible to search engines)
-          label class='radio'
-            = f.radio_button :visibility, :creconsole
-            | Visible to other CREConsole users
-          label class='radio'
-            = f.radio_button :visibility, :private
-            | Private (Visible to only myself)
-
-      .control-group
-        .controls
-          = f.submit 'Save', class: 'btn', data: {disable_with: 'Submitting...'}
-  /= javascript_include_tag 'settings/rates'
-
-div class="page-title"
-  h1
+.page-title
+  h2.span9.settings-header
     | Investor Info
-div class="row"
-  div class="col-lg-12"
-    div class="widget-container fluid-height"
-      div class="heading"
-        i class="fa fa-edit"
-        | Form Wizard
-      div class="widget-content"
-        div class="wizard" id="wizard"
-          div class="padded"
-            ul class="wizard-nav nav nav-pills"
-              li
-                a data-toggle="tab" href="#tab1"
-                  | 1
-              li
-                a data-toggle="tab" href="#tab2"
-                  | 2
-              li
-                a data-toggle="tab" href="#tab3"
-                  | 3
-            div class="progress progress-striped active"
-              div aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="progress-bar" role="progressbar"
-            div class="tab-content"
-              div class="tab-pane" id="tab1"
-                h2
-                  | Login Credentials
-                = nested_form_for [current_user, @investor], url: {action: :update}, html: {class: 'form-horizontal'} do |f|
-                  = f.hidden_field :user_id
-                  div class="form-group"
-                    = f.label :title
-                    = f.text_field :title, placeholder: 'Title', class: "form-control"
-              div class="tab-pane" id="tab2"
-                h2
-                  | Personal Information
-                = nested_form_for [current_user, @investor], url: {action: :update}, html: {class: 'form-horizontal'} do |f|
-                  = f.hidden_field :user_id
-                  div class="form-group"
-                    = f.label :title
-                    = f.text_field :title, placeholder: 'Title', class: "form-control"
-              div class="tab-pane" id="tab3"
-                h2
-                  | Payment Information
-                = nested_form_for [current_user, @investor], url: {action: :update}, html: {class: 'form-horizontal'} do |f|
-                  = f.hidden_field :user_id
-                    div class="form-group"
-                      = f.label :title
-                      = f.text_field :title, placeholder: 'Title', class: "form-control"
+.row
+  .col-lg-12
+    .widget-container.fluid-height.clearfix
+      .widget-content.padded
+        = nested_form_for [current_user, @investor], url: {action: :update}, html: {class: 'form-horizontal'} do |f|
+          = f.hidden_field :user_id
+          .form-group
+            = f.text_field :title, placeholder: 'Title', class: "form-control"
+            = render partial: 'shared/help_inline', locals: {model: @investor, attribute: :title}
 
-          div class="pager"
-            div class="btn btn-default-outline btn-previous"
-              i class="fa fa-long-arrow-left"
-                | Back
-            div class="btn btn-primary-outline btn-next"
-              | Continue
-              i class="fa fa-long-arrow-right"
-br
-br
-br
-br
-br
-br
-br
-br
-br
-br
-br
-br
-br
+          .form-group
+              = f.text_field :price_from, placeholder: 'Price from', class: "form-control"
+              = render partial: 'shared/help_inline', locals: {model: @investor, attribute: :price_from}
+
+          .form-group
+              = f.text_field :price_to, placeholder: 'Price to', class: "form-control"
+              = render partial: 'shared/help_inline', locals: {model: @investor, attribute: :price_to}
+
+          .form-group
+            label.control-label.col-md-2
+              | Visibility
+            .col-md-7
+              = render partial: 'shared/help_block', locals: {model: @investor, attribute: :visibility}
+              label.radio-inline
+                = f.radio_button :visibility, :public, type: 'radio'
+                span
+                  | Public (Visible to search engines)
+              label.radio-inline
+                = f.radio_button :visibility, :creconsole, type: 'radio'
+                span
+                  | Visible to other CREConsole users
+              label.radio-inline
+                = f.radio_button :visibility, :private, type: 'radio'
+                span
+                  | Private (Visible to only myself)
+
+          = f.submit 'Save', class: 'btn', data: {disable_with: 'Submitting...'}
+

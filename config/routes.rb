@@ -47,7 +47,6 @@ Rails.application.routes.draw do
   end
 
   #resources :blog, only: [:index, :show]
-
   get '/terms', to: 'legal#terms'
   get '/sitemap.xml.gz', to: 'sitemaps#show'
   get '/login', to: 'login#main'

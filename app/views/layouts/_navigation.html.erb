@@ -1,0 +1,95 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <span>
+                      <% if current_user.picture.present? %>
+                        <img alt="image" class="img-circle" img width="50" height="50" src="<%= current_user.picture_url.to_s %>"/>
+                      <% else %>
+                        <img alt="image" class="img-circle" img width="50" height="50" src="<%= image_url 'default.jpg' %>"/>
+                      <% end %>
+                    </span>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold"><%= current_user.full_name %></strong>
+                            </span>
+                          <span class="text-muted text-xs block"><%= current_user.industry_role %></span>
+                          <% if current_user.investor.present? %>
+                          <span class="text-muted text-xs block"><%= current_user.investor.title %><b class="caret"></b></span>
+                          <% end %>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <% if current_user.investor.present? %>
+                        <li>
+                          <a href="<%= investor_path(current_user.investor) %>">Profile</a>
+                        </li>
+                        <% end %>
+                        <li><a href="<%= edit_user_path(current_user) %>">Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                          <%= link_to(' Logout', destroy_user_session_path, :method => :delete, class: "fa fa-sign-out") %>
+                        </li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    CREC
+                </div>
+            </li>
+          <li class="<%= is_active_controller('landings') %>">
+            <%= link_to root_path do %>
+                <i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span>
+            <% end %>
+          </li>
+          <% if current_user.completed_investor_account? %>
+              <li class="<%= is_active_controller('investors') && is_active_action('show') %>">
+                <%= link_to investor_path(current_user.investor) do %>
+                    <i class="fa fa-user"></i> <span class="nav-label">Profile</span>
+                <% end %>
+              </li>
+          <% end %>
+          <% if current_user.completed_investor_account? || current_user.client.present? %>
+              <li class="<%= is_active_controller('assets') && (is_active_action('index') || is_active_action('show')) %>">
+                <%= link_to assets_path do %>
+                    <i class="fa fa-building-o"></i> <span class="nav-label">Assets</span>
+                <% end %>
+              </li>
+          <% end %>
+          <% unless current_user.client.present? && !current_user.completed_investor_account? %>
+              <li class="<%= is_active_controller('asset_listings') && (is_active_action('index') || is_active_action('show')) %>">
+                <%= link_to asset_listings_path do %>
+                    <i class="fa fa-search"></i> <span class="nav-label">Find Properties</span>
+                <% end %>
+              </li>
+          <% end %>
+          <% if current_user.client.present? %>
+              <li class="<%= is_active_controller('asset_listings') && is_active_action('new') %>">
+                <%= link_to new_asset_listing_path do %>
+                    <i class="fa fa-plus-square-o"></i> <span class="nav-label">New Listing</span>
+                <% end %>
+              </li>
+          <% end %>
+          <li>
+            <a href=""><i class="fa fa-cogs"></i> <span class="nav-label">Settings</span> <span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <li><%= link_to "Basic Info", edit_user_path(current_user) %></li>
+              <% if current_user.checked_terms? %>
+                  <li><%= link_to "#{current_user.investor.present? ? ' Investor Info' : ' Create Investor Account'}", edit_user_investor_path(current_user) %></li>
+              <% end %>
+              <% if current_user.client.present? %>
+                  <li><%= link_to "Client Info", edit_user_client_path(current_user) %></li>
+              <% else %>
+                  <li><%= link_to "Create Client Account", edit_user_client_path(current_user) %></li>
+              <% end %>
+
+            </ul>
+          </li>
+        </ul>
+    </div>
+</nav>
+
+
+

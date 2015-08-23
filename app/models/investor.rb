@@ -35,7 +35,7 @@ class Investor < ActiveRecord::Base
   #validates :availability, inclusion: { in: ['part-time', 'full-time', 'unavailable'], message: 'must be selected' }
   #validates :calculated_availability, inclusion: { in: ['part-time', 'full-time', 'unavailable'], message: 'must be selected' }
   #validates :onsite_status, inclusion: { in: ['offsite', 'visits_allowed', 'occasional', 'onsite'], message: 'must be selected' }
-  validates :visibility, inclusion: { in: ['public', 'private'], message: 'must be selected' }
+  validates :visibility, inclusion: { in: ['public', 'private', 'creconsole'], message: 'must be selected' }
 
   #validate :has_skills?
 

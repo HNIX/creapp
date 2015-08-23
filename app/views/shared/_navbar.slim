@@ -8,6 +8,7 @@
               /= image_tag current_user.picture_url.to_s
               img width="34" height="34" src='#{current_user.picture_url.to_s}'
               = current_user.full_name
+              b.caret
             ul class="dropdown-menu"
               li
                 a href="#{edit_user_path(current_user)}"
@@ -56,6 +57,30 @@
                 a href="#{new_asset_listing_path}"
                   span aria-hidden="true" class="fa fa-plus-square-o"
                   | New Listing
+            li.dropdown
+              a data-toggle="dropdown" href="#"
+                span aria-hidden="true" class="fa fa-cogs"
+                | Settings
+                b.caret
+              ul.dropdown-menu
+                li
+                  a href="#{edit_user_path(current_user)}"
+                    span aria-hidden="true"
+                    |  Basic Info
+                - if current_user.checked_terms?
+                  li
+                    a href="#{edit_user_investor_path(current_user)}"
+                      span aria-hidden="true"
+                      | #{current_user.investor.present? ? ' Investor Info' : ' Create Investor Account'}
+                  li
+                    - if current_user.client.present?
+                      a href="#{edit_user_client_path(current_user)}"
+                        span aria-hidden="true"
+                        |  Client Info
+                    - else
+                      a href="#{new_user_client_path(current_user)}"
+                        span aria-hidden="true"
+                        |  Create Client Account
 - else
   .navbar.navbar-fixed-top
     .container-fluid.top-bar

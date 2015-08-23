@@ -15,7 +15,10 @@ class ApplicationController < ActionController::Base
 
   def main
     @custom_description = 'CREConsole is a marketplace for commercial real estate.'
-    render('/landings/loggedout') unless current_user.present?
+    render('/landings/index') unless current_user.present?
+    if current_user.present?
+      render layout: "application"
+    end
   end
 
   def after_sign_in_path_for(resource)

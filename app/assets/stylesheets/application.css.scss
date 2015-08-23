@@ -11,35 +11,8 @@
 * file per style scope.
 *
 *= stub active_admin
-*= require_self
-*= require_tree .
-*/
-@import "font-awesome";
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "seven/se7en-font";
-@import "seven/isotope";
-@import "seven/jquery.fancybox";
-@import "seven/fullcalendar";
-@import "seven/wizard";
-@import "seven/select2";
-@import "seven/morris";
-@import "seven/datatables";
-@import "seven/datepicker";
-@import "seven/timepicker";
-@import "seven/colorpicker";
-@import "seven/bootstrap-switch";
-@import "seven/bootstrap-editable";
-@import "seven/daterange-picker";
-@import "seven/typeahead";
-@import "seven/summernote";
-@import "seven/ladda-themeless.min";
-@import "seven/social-buttons";
-@import "seven/pygments";
-@import "seven/style";
-@import "seven/color/green";
-@import "seven/color/orange";
-@import "seven/color/magenta";
-@import "seven/color/gray";
-@import "seven/jquery.fileupload-ui";
-@import "seven/dropzone";
+ *= require_self
+ *= require animate/animate.css
+ *= require style
+ *= require font-awesome
+ */
