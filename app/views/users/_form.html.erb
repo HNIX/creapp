@@ -1,0 +1,44 @@
+<h1>Account</h1>
+<h2><%= @checked_terms ? 'Basic Info' : 'Registration' %></h2>
+<div class="form-group">
+  <label class="col-lg-4 control-label">First Name *</label>
+  <div class="col-lg-8">
+    <%= f.text_field :first_name, placeholder: 'First Name', class: "form-control required" %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-lg-4 control-label">Last Name *</label>
+  <div class="col-lg-8">
+    <%= f.text_field :last_name, placeholder: 'Last Name', class: "form-control required" %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-lg-4 control-label">Email *</label>
+  <div class="col-lg-8">
+    <%= f.text_field :email, placeholder: 'Email', class: "form-control required" %>
+  </div>
+</div>
+<%= render partial: 'users/password_form', locals: {f: f, user: user} %>
+<div class="form-group">
+  <label class="col-lg-4 control-label">Industry Role *</label>
+  <div class="col-lg-8">
+    <%= f.select(:industry_role, options_for_select([['Industry Role', ''], ['Principal', 'Principal'], ['Broker', 'Broker'], ['Lender', 'Lender'], ['Service Provider', 'Service Provider']], selected: current_user.industry_role), {}, {class: "form-control required"}) %>
+  </div>
+</div>
+<% unless user.checked_terms_was %>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-8">
+      <div class="i-checks">
+        <label class="checkbox">
+        <%= f.check_box :checked_terms %>
+        <span>"By checking this box, I agree to abide by CREConsole's <a href="/terms" target="_blank">Terms of User</a></span>
+        </label>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="form-group">
+  <div class="col-lg-offset-2 col-lg-8">
+    <%= f.submit "Update", data: {disable_with: 'Submitting...'}, class: "btn btn-sm btn-white" %>
+  </div>
+</div>

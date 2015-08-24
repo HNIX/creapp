@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
   def edit
     @role = params[:industry_role]
+    @checked_terms = current_user.checked_terms_was
   end
 
   def update
