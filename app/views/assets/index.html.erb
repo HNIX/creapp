@@ -1,0 +1,190 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-sm-4">
+    <h2>Asset list</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="wrapper wrapper-content animated fadeInUp">
+      <% unless @assets_as_client.empty? %>
+          <div class="ibox">
+            <div class="ibox-title">
+              <h5>Assets as a client</h5>
+              <div class="ibox-tools">
+                <a href="<%= url_for(new_asset_path)%>" class="btn btn-primary btn-xs">Create new asset</a>
+              </div>
+            </div>
+            <div class="ibox-content">
+              <div class="row m-b-sm m-t-sm">
+                <div class="col-md-1">
+                  <button type="button" id="loading-example-btn" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> Refresh</button>
+                </div>
+                <div class="col-md-11">
+                  <div class="input-group">
+                    <input type="text" placeholder="Search" class="input-sm form-control">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-sm btn-primary"> Go!</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="project-list">
+                <table class="table table-hover">
+                  <tbody>
+                    <% @assets_as_client.each do |asset| %>
+                      <tr>
+                        <td class="project-status">
+                          <%= asset.state.humanize %>
+                        </td>
+                        <td class="project-title">
+                          <%= link_to asset.name, edit_asset_path(asset) %>
+                          <br />
+                          <small>Created <%= asset_listing.created_at %></small>
+                        </td>
+                        <td class="project-completion">
+                          <small>Completion with: 48%</small>
+                          <div class="progress progress-mini">
+                            <div style="width: 48%;" class="progress-bar"></div>
+                          </div>
+                        </td>
+                        <td class="project-people">
+                          <%= asset.investor.user.full_name %>
+                        </td>
+                        <td class="project-actions">
+                          <a href="<%= url_for(asset_path(asset))%>" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
+                          <a href="<%= url_for(edit_asset_path(asset))%>" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                        </td>
+                      </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+      <% end %>
+      <% unless @asset_listings_as_client.empty? %>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Asset listings as a client</h5>
+            <div class="ibox-tools">
+              <a href="<%= url_for(new_asset_listing_path)%>" class="btn btn-primary btn-xs">Create new listing</a>
+            </div>
+          </div>
+          <div class="ibox-content">
+            <div class="row m-b-sm m-t-sm">
+              <div class="col-md-1">
+                <button type="button" id="loading-example-btn" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> Refresh</button>
+              </div>
+              <div class="col-md-11">
+                 <div class="input-group">
+                   <input type="text" placeholder="Search" class="input-sm form-control">
+                   <span class="input-group-btn">
+                     <button type="button" class="btn btn-sm btn-primary"> Go!</button>
+                   </span>
+                 </div>
+              </div>
+            </div>
+              <div class="project-list">
+                <table class="table table-hover">
+                  <tbody>
+                    <% @asset_listings_as_client.each do |asset_listing| %>
+                      <tr>
+                        <td class="project-status">
+                          <% if asset_listing.ended? %>
+                              <span class="label label-default">Ended</span>
+                          <% else %>
+                              <span class="label label-primary">Active</span>
+                          <% end %>
+                        </td>
+                        <td class="project-title">
+                          <%= link_to "#{asset_listing.title}#{asset_listing.ended ? ' (ended)' : ''}", edit_asset_listing_path(asset_listing) %>
+                          <br />
+                          <small>Created <%= asset_listing.created_at %></small>
+                        </td>
+                        <td class="project-completion">
+                          <small>Completion with: 48%</small>
+                          <div class="progress progress-mini">
+                            <div style="width: 48%;" class="progress-bar"></div>
+                          </div>
+                        </td>
+                        <td class="project-people">
+                          <a href=""><img alt="image" class="img-circle" src="<%= image_path('a3.jpg') %>"></a>
+                          <a href=""><img alt="image" class="img-circle" src="<%= image_path('a1.jpg') %>"></a>
+                          <a href=""><img alt="image" class="img-circle" src="<%= image_path('a2.jpg') %>"></a>
+                          <a href=""><img alt="image" class="img-circle" src="<%= image_path('a4.jpg') %>"></a>
+                          <a href=""><img alt="image" class="img-circle" src="<%= image_path('a5.jpg') %>"></a>
+                        </td>
+                        <td class="project-actions">
+                          <a href="<%= url_for(asset_listing_path(asset_listing))%>" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
+                          <a href="<%= url_for(edit_asset_listing_path(asset_listing))%>" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+          </div>
+        </div>
+      <% end %>
+      <% unless @assets_as_investor.empty? %>
+          <div class="ibox">
+            <div class="ibox-title">
+              <h5>Assets as an Investor</h5>
+              <div class="ibox-tools">
+                <a href="<%= url_for(new_asset_path)%>" class="btn btn-primary btn-xs">Create new asset</a>
+              </div>
+            </div>
+            <div class="ibox-content">
+              <div class="row m-b-sm m-t-sm">
+                <div class="col-md-1">
+                  <button type="button" id="loading-example-btn" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> Refresh</button>
+                </div>
+                <div class="col-md-11">
+                  <div class="input-group">
+                    <input type="text" placeholder="Search" class="input-sm form-control"> <span class="input-group-btn">
+                    <button type="button" class="btn btn-sm btn-primary"> Go!</button>
+                  </span>
+                  </div>
+                </div>
+              </div>
+              <div class="project-list">
+                <table class="table table-hover">
+                  <tbody>
+                  <% @assets_as_investor.each do |asset| %>
+                      <tr>
+                        <td class="project-status">
+                          <%= asset.state.humanize %>
+                        </td>
+                        <td class="project-title">
+                          <%= link_to asset.name, edit_asset_path(asset) %>
+                          <br />
+                          <small>Created <%= asset.created_at %></small>
+                        </td>
+                        <td class="project-completion">
+                          <small>Completion with: 48%</small>
+                          <div class="progress progress-mini">
+                            <div style="width: 48%;" class="progress-bar"></div>
+                          </div>
+                        </td>
+                        <td class="project-people">
+                          <%= asset.client.user.full_name %>
+                        </td>
+                        <td class="project-actions">
+                          <a href="<%= url_for(asset_path(asset))%>" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
+                          <a href="<%= url_for(edit_asset_path(asset))%>" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                        </td>
+                      </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+      <% end %>
+      <% if @assets_as_client.empty? && @asset_listings_as_client.empty? && @assets_as_investor.empty? %>
+          <h2>You currently have no assets set up.</h2>
+      <% end %>
+    </div>
+  </div>
+</div>
+

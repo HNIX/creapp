@@ -52,6 +52,6 @@ class AssetListingsController < ApplicationController
   protected
 
   def asset_listing_params
-    params.require(:asset_listing).permit(:name, :title, :description, :visibility, :'offer_date(1i)', :'offer_date(2i)', :'offer_date(3i)')
+    params.require(:asset_listing).permit(:price, :ended, :name, :title, :description, :visibility, :'offer_date(1i)', :'offer_date(2i)', :'offer_date(3i)')
   end
 end

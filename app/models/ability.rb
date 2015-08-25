@@ -27,7 +27,7 @@ class Ability
       # end
       can :read, AssetListing do |item|
         if item.ended
-          user.client.present? && (item.client_id == user.client_id)
+          user.client.present? && (item.client_id == user.id)
         else
           true
         end
