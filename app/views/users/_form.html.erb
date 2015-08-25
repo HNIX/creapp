@@ -1,5 +1,4 @@
-<h1>Account</h1>
-<h2><%= @checked_terms ? 'Basic Info' : 'Registration' %></h2>
+<h1><%= user.checked_terms_was ? 'Basic Info' : 'Registration' %></h1>
 <div class="form-group">
   <label class="col-lg-4 control-label">First Name *</label>
   <div class="col-lg-8">
@@ -38,7 +37,7 @@
   </div>
 <% end %>
 <div class="form-group">
-  <div class="col-lg-offset-2 col-lg-8">
-    <%= f.submit "Update", data: {disable_with: 'Submitting...'}, class: "btn btn-sm btn-white" %>
+  <div class="col-lg-offset-4 col-lg-8">
+    <%= f.submit "Save Changes", data: {disable_with: 'Submitting...'}, class: "btn btn-primary btn-lg" %>
   </div>
 </div>

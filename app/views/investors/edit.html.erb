@@ -1,7 +1,9 @@
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-10">
     <h2>Settings</h2>
-
+    <% if @investor.private? %>
+        <p><%= render partial: 'shared/notice_message', locals: {message: 'Your account is currently private.  If you want clients to contact you, change your account visibility.'} %></p>
+    <% end %>
   </div>
 </div>
 
@@ -30,8 +32,8 @@
           </div>
         </div>
         <div class="ibox-content">
-          <%= form_for [current_user], url: {action: :update}, html: {class: 'form-horizontal', multipart: true} do |f| %>
-              <%= render partial: 'users/form', locals: {f: f, user: current_user} %>
+          <%= form_for [current_user, @investor], url: {action: :update}, html: {class: 'form-horizontal'} do |f| %>
+            <%= render partial: 'investors/form', locals: {f: f, user: current_user} %>
           <% end %>
         </div>
       </div>
@@ -59,23 +61,18 @@
 
 <% content_for :javascript do %>
 
-    <script type="text/javascript">
+  <script type="text/javascript">
 
 
-        $(function() {
+    $(function() {
 
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
+      $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+      });
 
-        });
+    });
 
-    </script>
-
+  </script>
 <% end %>
-
-
-
-
 

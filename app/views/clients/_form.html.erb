@@ -1,0 +1,22 @@
+<h1>Client Info</h1>
+<br>
+<%= f.hidden_field :user_id %>
+<div class="form-group">
+  <label class="col-lg-4 control-label">Company</label>
+  <div class="col-lg-8">
+    <%= f.text_field :company, placeholder: 'Company Name', class: "form-control" %>
+    <%= render partial: 'shared/help_inline', locals: {model: @client, attribute: :company} %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-lg-4 control-label">Description</label>
+  <div class="col-lg-8">
+    <%= f.text_area :description, placeholder: 'Describe your company.', class: "form-control" %>
+    <%= render partial: 'shared/help_block', locals: {model: @client, attribute: :description} %>
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-lg-offset-4 col-lg-8">
+    <%= f.submit "Save Changes", data: {disable_with: 'Submitting...'}, class: "btn btn-primary btn-md" %>
+  </div>
+</div>
