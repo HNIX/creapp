@@ -7,7 +7,36 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
   <div class="row">
-    <div class="col-lg-7">
+    <div class="col-lg-6">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>User Settings</h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="fa fa-wrench"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+              <li><a href="#">Config option 1</a>
+              </li>
+              <li><a href="#">Config option 2</a>
+              </li>
+            </ul>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content">
+          <%= form_for [current_user], url: {action: :update}, html: {class: 'form-horizontal', multipart: true} do |f| %>
+              <%= render partial: 'users/address', locals: {f: f, user: current_user} %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
           <h5>User Settings</h5>
@@ -36,26 +65,65 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-5">
-      <div class="jumbotron">
-        <h2>Create Client Account</h2>
-        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. <br></span>
-        </br>
-        <p><a href="/" role="button" class="btn btn-primary btn-lg">Learn more</a>
-        </p>
+    <div class="col-lg-6">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Password</h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="fa fa-wrench"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+              <li><a href="#">Config option 1</a>
+              </li>
+              <li><a href="#">Config option 2</a>
+              </li>
+            </ul>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content">
+          <div class="text-center">
+            <a data-toggle="modal" class="btn btn-danger" href="#modal-form">Change Account Password</a>
+          </div>
+          <div id="modal-form" class="modal fade" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-sm-12"><h3 class="m-t-none m-b">Change Password</h3>
+
+                      <p>Enter New Password</p>
+
+                      <%= form_for [current_user], url: {action: :update}, html: {class: 'form-horizontal', multipart: true} do |f| %>
+                          <div class="form-group">
+                            <%= f.password_field :password, placeholder: 'Password', class: "form-control required" %>
+                          </div>
+                          <div class="form-group">
+                            <%= f.password_field :password_confirmation, placeholder: 'Type Password Again', class: "form-control required" %>
+                          </div>
+                          <div>
+                            <%= f.submit "Change Password", data: {disable_with: 'Submitting...'}, class: "btn btn-danger btn-lg" %>
+                          </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-lg-5">
-      <div class="jumbotron">
-        <h2>Create Client Account</h2>
-        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. <br></span>
-        </br>
-        <p><a role="button" class="btn btn-primary btn-lg">Learn more</a>
-        </p>
-      </div>
-    </div>
-  </div>
+
+
 </div>
+
 
 <% content_for :javascript do %>
 

@@ -1,0 +1,65 @@
+<% if action == :update %>
+    <h1><%= @asset_listing.name %></h1>
+<% else %>
+    <h1>Listing Info</h1>
+<% end %>
+<div class="form-group">
+  <label class="col-lg-4 control-label">Title</label>
+  <div class="col-lg-8">
+    <%= f.text_field :title, placeholder: 'Listing Title' %>
+    <%= render partial: 'shared/help_inline', locals: {model: @asset_listing, attribute: :title} %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-lg-4 control-label">Property Name</label>
+  <div class="col-lg-8">
+    <%= f.text_field :name, placeholder: 'Property Name' %>
+    <%= render partial: 'shared/help_inline', locals: {model: @asset_listing, attribute: :name} %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-lg-4 control-label">Property Description</label>
+  <div class="col-lg-8">
+    <%= f.text_area :description, placeholder: 'A description of the property.', class: 'span6 longer-text' %>
+    <%= render partial: 'shared/help_block', locals: {model: @asset_listing, attribute: :description} %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-lg-4 control-label">Asking Price</label>
+  <div class="col-lg-8">
+    <%= f.text_field :price, class: 'short-field' %>
+    <%= render partial: 'shared/help_inline', locals: {model: @asset_listing, attribute: :price} %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-lg-4 control-label">Offer Date</label>
+  <div class="col-lg-8">
+    <%= f.date_select :offer_date, {default: Date.today + 60}, class: 'date-field' %>
+    <%= render partial: 'shared/help_block', locals: {model: @asset_listing, attribute: :offer_date} %>
+  </div>
+</div>
+<div class="form-group"><label class="col-sm-4 control-label">Visibility <br/></label>
+
+  <div class="col-sm-8">
+    <div class="i-checks"><label> <%= f.radio_button :visibility, :public %> <i></i> Public (Visible to search engines) </label></div>
+    <div class="i-checks"><label> <%= f.radio_button :visibility, :creconsole, type: 'radio' %> <i></i> Visible to other CREConsole users </label></div>
+    <div class="i-checks"><label> <%= f.radio_button :visibility, :private, type: 'radio' %> <i></i> Private (Visible to only myself) </label></div>
+  </div>
+</div>
+<% if action == :update %>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-8">
+      <div class="i-checks">
+        <label class="checkbox">
+        <%= f.check_box :ended %>
+        <span>"The listing has ended, and I no longer need investors."</span>
+        </label>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="form-group">
+  <div class="col-lg-offset-4 col-lg-8">
+    <%= f.submit "Save Changes", data: {disable_with: 'Submitting...'}, class: "btn btn-primary btn-lg" %>
+  </div>
+</div>

@@ -97,7 +97,7 @@
                           <% end %>
                         </td>
                         <td class="project-title">
-                          <%= link_to "#{asset_listing.title}#{asset_listing.ended ? ' (ended)' : ''}", edit_asset_listing_path(asset_listing) %>
+                          <%= link_to "#{asset_listing.name}#{asset_listing.ended ? ' (ended)' : ''}", edit_asset_listing_path(asset_listing) %>
                           <br />
                           <small>Created <%= asset_listing.created_at %></small>
                         </td>

@@ -1,8 +1,0 @@
-h3
-  | Property Listings
-- if @asset_listings.empty?
-  | There are currently no property listings available.
-- else
-  - @asset_listings.each do |asset_listing|
-    p
-      = link_to asset_listing.title, asset_listing_path(asset_listing, search: true)

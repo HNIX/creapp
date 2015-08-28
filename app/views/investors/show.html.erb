@@ -5,7 +5,7 @@
   </div>
 <div class="wrapper wrapper-content animated fadeInRight">
 <div class="row">
-  <div class="col-lg-4">
+  <div class="col-lg-6">
     <div class="contact-box">
       <a href="<%= url_for(edit_user_investor_path(current_user)) %>">
       <div class="col-sm-4">
@@ -23,9 +23,11 @@
         <p><%= current_user.industry_role %></p>
         <address>
           <strong><%= current_user.client.company %></strong><br>
-          795 Folsom Ave, Suite 600<br>
-          San Francisco, CA 94107<br>
-          <abbr title="Phone">P:</abbr> (123) 456-7890
+          <%= current_user.address %><br>
+          <%= current_user.city %>, <%= current_user.state %> <%= current_user.zip %><br><br>
+          <abbr title="Phone">P:</abbr> <%= current_user.phone1 %><br>
+          <abbr title="Phone">M:</abbr> <%= current_user.phone2 %><br>
+
         </address>
       </div>
       <div class="clearfix"></div>

@@ -65,6 +65,7 @@ gem 'mini_magick',             '3.8.0'
 gem 'fog',                     '1.23.0'
 gem 'font-awesome-rails'
 gem 'jquery-steps-rails'
+gem 'country_select', github: 'stefanpenner/country_select'
 
 group :development do
   gem 'better_errors'

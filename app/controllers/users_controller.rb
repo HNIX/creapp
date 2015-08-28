@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   def edit
     @role = params[:industry_role]
     @checked_terms = current_user.checked_terms_was
+
   end
 
   def update
@@ -28,6 +29,6 @@ class UsersController < ApplicationController
   def user_params
     params[:user].delete(:password) if params[:user][:password].blank?
     params[:user].delete(:password_confirmation) if params[:user][:password_confirmation].blank?
-    params.require(:user).permit(:industry_role, :picture, :first_name, :last_name, :email, :password, :password_confirmation, :checked_terms)
+    params.require(:user).permit(:status, :responsibilities, :address, :city, :country, :state, :zip, :phone1, :phone2, :license, :industry_role, :picture, :first_name, :last_name, :email, :password, :password_confirmation, :checked_terms)
   end
 end

@@ -1,0 +1,50 @@
+<h1><%= user.checked_terms_was ? 'Contact Info' : 'Registration' %></h1>
+<div class="form-group">
+  <label class="col-lg-4 control-label">Address</label>
+  <div class="col-lg-8">
+    <%= f.text_field :address, placeholder: 'Street Address', class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-lg-4 control-label">City</label>
+  <div class="col-lg-8">
+    <%= f.text_field :city, placeholder: 'City', class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-lg-4 control-label">Country</label>
+  <div class="col-lg-8">
+    <%= f.country_select( :country, {priority: ['US', 'CA']}, class: 'form-control') %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-lg-4 control-label">State</label>
+  <div class="col-lg-8">
+    <%= f.text_field :state, placeholder: 'State', class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-lg-4 control-label">Zip Code</label>
+  <div class="col-lg-8">
+    <%= f.text_field :zip, placeholder: 'Zip Code', class: "form-control" %>  </div>
+</div>
+<div class="form-group">
+  <label class="col-lg-4 control-label">Phone</label>
+  <div class="col-lg-8">
+    <%= f.text_field :phone1, placeholder: 'Phone Number', class: "form-control" %>  </div>
+</div>
+<div class="form-group">
+  <label class="col-lg-4 control-label">Mobile</label>
+  <div class="col-lg-8">
+    <%= f.text_field :phone2, placeholder: 'Mobile Phone', class: "form-control" %>  </div>
+</div>
+<div class="form-group">
+  <label class="col-lg-4 control-label">License</label>
+  <div class="col-lg-8">
+    <%= f.text_field :license, placeholder: 'License Number', class: "form-control" %>  </div>
+</div>
+<div class="form-group">
+  <div class="col-lg-offset-4 col-lg-8">
+    <%= f.submit "Save Contact Info", data: {disable_with: 'Submitting...'}, class: "btn btn-primary" %>
+  </div>
+</div>
