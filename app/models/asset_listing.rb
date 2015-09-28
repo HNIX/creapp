@@ -25,11 +25,11 @@
 #
 
 class AssetListing < ActiveRecord::Base
-  belongs_to :client
+  belongs_to :user
   has_one :location, dependent: :destroy
   has_many :tenants, dependent: :destroy
 
-  validates :client_id, presence: true
+  validates :user_id, presence: true
   validates :name, presence: true
   validates :title, presence: true
   validates :description, presence: true

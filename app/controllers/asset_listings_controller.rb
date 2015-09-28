@@ -1,5 +1,5 @@
 class AssetListingsController < ApplicationController
-  before_filter :client_required, only: [:new, :create, :edit, :update]
+  before_filter :user_required, only: [:new, :create, :edit, :update]
 
   load_and_authorize_resource
 
@@ -18,12 +18,11 @@ class AssetListingsController < ApplicationController
   end
 
   def new
-    @asset_listing = AssetListing.new(client_id: current_user.client.id, visibility: :public)
+    @asset_listing = AssetListing.new(user_id: current_user.id, visibility: :public)
   end
 
   def create
     @asset_listing = AssetListing.new(asset_listing_params)
-    @asset_listing.client = current_user.client
 
     if @asset_listing.save
       flash[:notice] = 'The asset listing has been created.'

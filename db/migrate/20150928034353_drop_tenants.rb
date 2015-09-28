@@ -1,5 +1,9 @@
-class CreateTenants < ActiveRecord::Migration
-  def change
+class DropTenants < ActiveRecord::Migration
+  def up
+    drop_table :tenants
+  end
+
+  def down
     create_table :tenants do |t|
       t.string :name
       t.integer :size

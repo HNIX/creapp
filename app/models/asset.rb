@@ -1,24 +1,19 @@
 class Asset < ActiveRecord::Base
-  belongs_to :client
-  belongs_to :investor
+  belongs_to :user
   has_many :asset_messages, dependent: :destroy
   accepts_nested_attributes_for :asset_messages
 
-  validates :client_id, presence: true
-  validates :investor_id, presence: true
   validates :name, presence: true
   #validates :availability, inclusion: { in: ['part-time', 'full-time'], message: 'must be selected' }
   validates :started_at, presence: true, if: Proc.new{|p| p.running? || p.finished?}
   validates :finished_at, presence: true, if: Proc.new{|p| p.finished? || p.disabled?}
 
-  validate :client_and_investor_are_different
   #validate :rate_is_unchanged, unless: :has_not_or_has_just_started?
   #validate :availability_is_unchanged, unless: :has_not_or_has_just_started?
   validate :finished_after_started, if: Proc.new{|p| p.started_at && p.finished_at}
 
   #before_validation :normalize_by_rate_type
 
-  #after_save :calculate_investor_availability
 
   state_machine :state, initial: :has_not_started do
     before_transition to: :running do |asset, transition|
@@ -54,15 +49,6 @@ class Asset < ActiveRecord::Base
     end
   end
 
-  def is_client?(user)
-    raise 'Called is_client? for non-user' unless user.kind_of?(User)
-    client.user == user
-  end
-
-  def other_user(user)
-    raise 'Called other_user for non-user' unless user.kind_of?(User)
-    (client.user == user) ? investor.user : client.user
-  end
 
   def hourly?
     rate_type == 'hourly'
@@ -79,21 +65,6 @@ class Asset < ActiveRecord::Base
       self.hourly_rate = nil
     elsif hourly?
       self.fixed_rate = nil
-    end
-  end
-
-  def calculate_investor_availability
-    if finished? || disabled? || running?
-      self.investor.calculate_calculated_availability
-      self.investor.save!
-    end
-  end
-
-  def client_and_investor_are_different
-    # NOTE: This would only throw an exception if the client or investor are missing, but that's invalid
-    begin
-      errors.add(:investor, 'must refer to a different user') if client.user == investor.user
-    rescue
     end
   end
 

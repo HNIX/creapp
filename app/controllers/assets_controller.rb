@@ -1,115 +1,65 @@
 class AssetsController < InheritedResources::Base
 
-  before_filter :client_or_investor_required, only: [:index, :edit, :create_message, :finish]
-  before_filter :client_required, only: [:new, :create]
-  before_filter :investor_required, only: [:new_application, :create_application]
+  # before_filter :client_or_investor_required, only: [:index, :edit, :create_message, :finish]
+  # before_filter :client_required, only: [:new, :create]
+  # before_filter :investor_required, only: [:new_application, :create_application]
 
   before_filter :required_account_is_conditional, only: [:offer, :cancel, :start, :decline]
 
   load_and_authorize_resource except: [:create, :create_message, :offer, :start, :cancel, :decline, :finish, :new_application, :create_application]
 
   def index
-    if current_user.client.present?
-      @assets_as_client = Asset.where(client_id: current_user.client.id)
-      @asset_listings_as_client = AssetListing.where(client_id: current_user.client.id)
+    if current_user.present?
+      @assets = Asset.where(user_id: current_user.id)
+      @asset_listings = AssetListing.where(user_id: current_user.id)
     else
-      @assets_as_client = []
-      @asset_listings_as_client = []
+      @assets_as_user = []
+      @asset_listings_as_user = []
     end
-    @assets_as_investor = current_user.completed_investor_account? ? Asset.where(investor_id: current_user.investor.id) : []
+    # @assets_as_investor = current_user.completed_investor_account? ? Asset.where(investor_id: current_user.investor.id) : []
   end
 
   def new
-    @investor = Investor.find(params[:investor_id])
-
-    #redirect_cannot_be_found if @investor.unavailable?
-    redirect_to_existing_asset(@investor, current_user.client)
-
-    # NOTE: It should be AssetFromDirectContact, but that would muck up the hidden parameters to be saved
-    @asset = Asset.new(client_id: current_user.client.id, investor_id: @investor.id)
+    @asset = Asset.new(user_id: current_user.id)
   end
 
   def create
     @asset = Asset.new(create_asset_params)
-    @investor = @asset.investor
-    #redirect_cannot_be_found if @investor.unavailable?
-
-    @asset.client_id = current_user.client.id
-    #@asset.hourly_rate = @investor.hourly_rate
-    #@asset.rate_type = 'hourly'
-    #@asset.availability = @investor.availability
-    @asset.asset_messages.first.sender_is_client = true if @asset.asset_messages.present?
-
     authorize! :create, @asset
-    create_asset_or_message(offer_asset_with_message(@asset), @asset.asset_messages.first, :new)
-  end
 
-  def new_application
-    @asset_listing = AssetListing.find(params[:asset_listing_id])
-
-    @investor = current_user.investor
-
-    redirect_to_existing_asset(@investor, @asset_listing.client)
-
-    authorize! :read, @asset_listing
-
-    # NOTE: Only use AssetFromApplication for additional validation rules on create
-    @asset = Asset.new(client_id: @asset_listing.client_id, investor_id: @investor.id, asset_listing_id: @asset_listing.id)
-
-    #@asset.rate_type = @asset_listing.suggested_rate_type
-  end
-
-  def create_application
-    @asset = AssetFromApplication.new(create_asset_application_params)
-    @investor = current_user.investor
-    @asset_listing = AssetListing.find(@asset.asset_listing_id)
-    #redirect_cannot_be_found if @investor.unavailable?
-
-    @asset.investor = @investor
-    @asset.client = @asset_listing.client
-    @asset.name = @asset_listing.title
-    #@asset.availability = @investor.unavailable? ? 'part-time' : @investor.availability
-
-    authorize! :create, @asset
-    create_asset_or_message(offer_asset_with_message(@asset), @asset.asset_messages.first, :new_application)
+    if @asset.save
+      flash[:notice] = 'The asset has been created.'
+      redirect_to asset_path
+    else
+      flash[:alert] = 'The asset could not be created.'
+      render :new
+    end
   end
 
   def edit
     @asset = Asset.find(params[:id])
-    @investor = @asset.investor
   end
 
-  def create_message
-    @asset = Asset.find(params[:id])
-    authorize! :update, @asset
-    @investor = @asset.investor
-    @asset_message = AssetMessage.new(create_message_params)
-    @asset_message.sender_is_client = @asset.is_client?(current_user)
-    @asset.asset_messages << @asset_message
-
-    create_asset_or_message(offer_asset_with_message(@asset), @asset_message, :edit)
-  end
-
-  def offer
-    # The rate and availability gets locked at the time of offer
-    state_change({direct_contact: :update_as_client, application: :update_as_investor}, ->{@asset.has_not_started?}, ->{@asset.availability = @asset.investor.availability; @asset.hourly_rate = @asset.investor.hourly_rate; @asset.offer!}, :offered, 'The asset has been offered.', 'The asset could not be offered.')
-  end
-
-  def cancel
-    state_change({direct_contact: :update_as_client, application: :update_as_investor}, asset_offered_lambda, ->{@asset.cancel!}, :canceled, 'The asset has been canceled.', 'The asset could not be canceled.')
-  end
-
-  def start
-    state_change({direct_contact: :update_as_investor, application: :update_as_client}, asset_offered_lambda, ->{@asset.start!}, :started, 'The asset has been started.', 'The asset could not be started.')
-  end
-
-  def decline
-    state_change({direct_contact: :update_as_investor, application: :update_as_client}, asset_offered_lambda, ->{@asset.decline!}, :declined, 'The asset has been declined.', 'The asset could not be declined.')
-  end
-
-  def finish
-    state_change({direct_contact: :update, application: :update}, ->{@asset.offered? || @asset.running?}, ->{@asset.finish!}, :finished, 'The asset is now finished.', 'The asset could not be finished.')
-  end
+  # def offer
+  #   # The rate and availability gets locked at the time of offer
+  #   state_change({direct_contact: :update_as_client, application: :update_as_investor}, ->{@asset.has_not_started?}, ->{@asset.availability = @asset.investor.availability; @asset.hourly_rate = @asset.investor.hourly_rate; @asset.offer!}, :offered, 'The asset has been offered.', 'The asset could not be offered.')
+  # end
+  #
+  # def cancel
+  #   state_change({direct_contact: :update_as_client, application: :update_as_investor}, asset_offered_lambda, ->{@asset.cancel!}, :canceled, 'The asset has been canceled.', 'The asset could not be canceled.')
+  # end
+  #
+  # def start
+  #   state_change({direct_contact: :update_as_investor, application: :update_as_client}, asset_offered_lambda, ->{@asset.start!}, :started, 'The asset has been started.', 'The asset could not be started.')
+  # end
+  #
+  # def decline
+  #   state_change({direct_contact: :update_as_investor, application: :update_as_client}, asset_offered_lambda, ->{@asset.decline!}, :declined, 'The asset has been declined.', 'The asset could not be declined.')
+  # end
+  #
+  # def finish
+  #   state_change({direct_contact: :update, application: :update}, ->{@asset.offered? || @asset.running?}, ->{@asset.finish!}, :finished, 'The asset is now finished.', 'The asset could not be finished.')
+  # end
 
   private
 

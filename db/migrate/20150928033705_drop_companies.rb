@@ -1,5 +1,9 @@
-class CreateCompanies < ActiveRecord::Migration
-  def change
+class DropCompanies < ActiveRecord::Migration
+  def up
+    drop_table :companies
+  end
+
+  def down
     create_table :companies do |t|
       t.string :name
       t.string :url

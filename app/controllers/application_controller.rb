@@ -23,12 +23,8 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    if cookies[:after_client_signed_up_path].present?
-      next_path_for_account(:client) || path_from_cookie(:after_client_signed_up_path)
-    elsif cookies[:after_investor_signed_up_path].present?
-      next_path_for_account(:investor) || path_from_cookie(:after_investor_signed_up_path)
-    else
-      next_path_for_account(:client_or_investor) || path_from_cookie(:after_account_signed_up_path) || root_path
+    if cookies[:after_account_signed_up_path].present?
+      path_from_cookie(:after_account_signed_up_path) || root_path
     end
   end
 

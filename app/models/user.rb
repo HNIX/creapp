@@ -25,9 +25,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :trackable, :validatable
-  has_one :investor, dependent: :destroy
-  has_one :client, dependent: :destroy
-  has_one :location, dependent: :destroy
+  has_many :assets
+  has_many :asset_listings
   mount_uploader :picture, PictureUploader
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -36,11 +35,6 @@ class User < ActiveRecord::Base
   #validates :state, presence: { if: Proc.new{|user| user.checked_terms? && user.american?} }
   validates :email, uniqueness: true, format: { with: /\A.*@.*\..*\z/ }
   validates :checked_terms, inclusion: { in: [true], message: '- The Terms of Use must be accepted' }
-  accepts_nested_attributes_for :investor, :client
-
-  def completed_investor_account?
-    investor.present? && !investor.incomplete?
-  end
 
   def full_name
     "#{first_name} #{last_name}"
