@@ -1,5 +1,9 @@
-class CreateClients < ActiveRecord::Migration
-  def change
+class DropClient < ActiveRecord::Migration
+  def up
+    drop_table :clients
+  end
+
+  def down
     create_table :clients do |t|
       t.references :user, index: true
       t.string :name
