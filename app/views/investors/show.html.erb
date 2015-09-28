@@ -22,7 +22,10 @@
         <h3><strong><%= current_user.full_name %></strong></h3>
         <p><%= current_user.industry_role %></p>
         <address>
-          <strong><%= current_user.client.company %></strong><br>
+          <% if current_user.client.present? %>
+          <strong><%= current_user.client.company || "" %></strong>
+          <% end %>
+          <br/>
           <%= current_user.address %><br>
           <%= current_user.city %>, <%= current_user.state %> <%= current_user.zip %><br><br>
           <abbr title="Phone">P:</abbr> <%= current_user.phone1 %><br>

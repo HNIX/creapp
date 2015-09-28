@@ -5,7 +5,7 @@
         |CRE
     h3
       | Register to CREConsole
-    p
+    P
       |Create account to see it in action.
     = form_for(resource, as: resource_name, url: registration_path(resource_name), class: "m-t") do |f|
       .form-group
@@ -16,8 +16,10 @@
         = f.text_field :email, placeholder: 'Email', class: "form-control"
       .form-group
         = f.password_field :password, placeholder: 'Password', class: "form-control"
+        = render partial: 'shared/help_inline', locals: {model: @user, attribute: :password}
       .form-group
         = f.password_field :password_confirmation, placeholder: 'Type Password Again', class: "form-control"
+        = render partial: 'shared/help_inline', locals: {model: @user, attribute: :password_confirmation}
       .form-group
         = f.select :industry_role, options_for_select([['Industry Role', ''], ['Principal', 'Principal'], ['Broker', 'Broker'], ['Lender', 'Lender'], ['Service Provider', 'Service Provider']]), {}, {class: 'form-control'}
       .form-group

@@ -1,10 +1,8 @@
 FactoryGirl.define do
   factory :client do
-    user nil
-name "MyString"
-subdomain "MyString"
-url "MyString"
-description "MyText"
+    sequence :company do |n|
+      "Test Company #{n}"
+    end
+    association :user, factory: :user_checked_terms
   end
-
 end

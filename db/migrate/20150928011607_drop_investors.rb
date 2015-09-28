@@ -1,5 +1,9 @@
-class CreateInvestors < ActiveRecord::Migration
-  def change
+class DropInvestors < ActiveRecord::Migration
+  def up
+    drop_table :investors
+  end
+
+  def down
     create_table :investors do |t|
       t.references :company, index: true
       t.string :title
